@@ -5,7 +5,9 @@
 
 /* LB Toggle Button */
 .toggle-switch {
-    position: relative;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     width: 100px;
     height: 50px;
     --light: #d8dbe0;
