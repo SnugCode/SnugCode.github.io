@@ -16,5 +16,6 @@ toggleButton.addEventListener('change', function() {
 
 // Set initial mode
 window.onload = function() {
+    
     body.classList.add('light-mode');
 }
