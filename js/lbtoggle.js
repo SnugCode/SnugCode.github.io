@@ -1,14 +1,20 @@
 const toggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
-toggleButton.addEventListener('click', function() {
+toggleButton.addEventListener('change', function() {
 
-    body.classList.toggle('dark-mode');
-    body.classList.toggle('light-mode');
+    if (this.checked) {
+
+        body.classList.add('dark-mode');
+        body.classList.remove('light-mode');
+    } else {
+
+        body.classList.add('light-mode');
+        body.classList.remove('dark-mode');
+    }
 });
 
 // Set initial mode
 window.onload = function() {
-
     body.classList.add('light-mode');
 }
