@@ -3,3 +3,27 @@
 /* Date Created: 15/06/2023 */
 /* Date Modified: 15/09/2024 */
 
+/* LB Toggle Button */
+#theme-toggle {
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Light Mode Button */
+body.light-mode {
+
+    background-color: white;
+    color: black;
+}
+
+/* Dark Mode Button */
+body.dark-mode {
+
+    background-color: #121212;
+    color: white;
+}
+
