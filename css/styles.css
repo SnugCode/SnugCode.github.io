@@ -4,15 +4,6 @@
 /* Date Modified: 15/09/2024 */
 
 /* LB Toggle Button */
-#theme-toggle {
-
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
 .toggle-switch {
     position: relative;
     width: 100px;
