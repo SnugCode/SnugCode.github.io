@@ -16,5 +16,5 @@ function loadHTML(id, url) {
 }
 
 // Load header and footer
-loadHTML('header', 'components/header.html');
-loadHTML('footer', 'components/footer.html');
+loadHTML('header', '../components/header.html');
+loadHTML('footer', '../components/footer.html');
