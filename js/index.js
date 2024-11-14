@@ -1,5 +1,3 @@
-// index.js
-
 // Function to load HTML content
 function loadHTML(id, url) {
     fetch(url)
