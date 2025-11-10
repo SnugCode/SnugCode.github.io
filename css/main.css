@@ -1,0 +1,49 @@
+:root {
+    --text: #ffffff;
+    --background: #000000;
+    --primary: #1a00df;
+    --secondary: #0d0d0d; 
+    --accent: #e45000;
+} 
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+} 
+
+a:hover {
+    color: var(--accent);
+}
+
+button {
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--accent);
+}
+
+header {
+    background-color: var(--secondary);
+    color: var(--text);
+    padding: 1rem 2rem;
+} 
+
+.text-accent { color: var(--accent); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
