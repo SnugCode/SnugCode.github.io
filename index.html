@@ -5,13 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/typography.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css"> 
+    <link rel="stylesheet" href="css/footer.css">
+    <!-- TODO: Add FavIcon -->
 
     <title>SnugCode Profile</title>
 </head>
 <body>
+    <!-- TODO: Add NavBar --> 
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about" class="active">About Me</a></li>
+                <li><a href="#projects">Projects</a></li> 
+                <li><a href="#stack">Core Stack</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <!-- TODO: Add Main Content -->
+    
+     <section id="about">
+        <!-- TODO: Fix Image Carousel -->
+        <div class="carousel">
+            <img src="assets/carousel/stockImage1.jpeg">
+            <img src="assets/carousel/stockImage2.jpeg">
+            <img src="assets/carousel/stockImage3.jpeg">
+        </div>
+        <div class="text">
+            <h1>About Me</h1>
+            <!-- TODO: Change text color based on the exact bgcolor behind each part of the text -->
+            <p>
+                Hello! I'm SnugCode, a passionate developer with a love for creating innovative solutions. Welcome to my portfolio where I showcase my projects and skills.
+            </p>
+        </div>
+     </section>
+     <section id="projects">
+        <h1>Projects</h1>
+        <div class="grid">
+        </div>
+    </section>
+     <section id="stack">
 
-    <script src="js/main.js"></script>
+     </section>
+     <section id="timeline">
+
+     </section>
+    <!-- TODO: Exapnd on Footer -->
+    <footer>
+        <small>&copy; 2025  SnugCode. All rights reserved.</small>
+    </footer>
+    <script type="module" src="js/main.js" defer></script>
 </body>
 </html>

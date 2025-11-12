@@ -1,0 +1,12 @@
+:root {
+    --text: #ffffff;
+    --background: #000000;
+    --primary: #1a00df;
+    --secondary: #0d0d0d; 
+    --accent: #e45000;
+} 
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
