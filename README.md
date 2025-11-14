@@ -1,16 +1,17 @@
-The following is a log on all the changes I've made for my Developer Profile.
+Hello Everyone, the following is a log of all the changes I am making throughout my DEveloper Profile.
 
-There are 3 things, I wish to learn here in terms of documenting/detailing and that is:
+Change Log
 
-1. Markdown
-2. Console Log
-3. Website
-
-Change Log:
+---
 
 v0.1:
 
-- Complete Refactor <!-- Changed the basic Structure of the Website to Pure JavaScript, HTML and CSS -->
+- Complete Refactor
+
+```
+Scrapped
+```
+
 - Added Console Log Welcome
 - Seperated css files <!-- Typography for lettering and main.css for any and all styling -->
 - Added License
@@ -19,3 +20,6 @@ v0.1:
 - Used .json and used that to pull data for the cards in Projects.
 - Sectioned off css files and js files.
 - Used Stock images for testing the carousel.
+- Carosuel Images: 2000px width and >250KB.
+
+---
