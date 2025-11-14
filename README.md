@@ -1,25 +1,6 @@
-Hello Everyone, the following is a log of all the changes I am making throughout my DEveloper Profile.
+This document acts as the Style Guide I have set to build my developer portfolio.
 
-Change Log
+\*\*\*Typography Styles
 
----
-
-v0.1:
-
-- Complete Refactor
-
-```
-Scrapped
-```
-
-- Added Console Log Welcome
-- Seperated css files <!-- Typography for lettering and main.css for any and all styling -->
-- Added License
-- Seperated Main Page Sections.
-- Added Content for About Me and Projects.
-- Used .json and used that to pull data for the cards in Projects.
-- Sectioned off css files and js files.
-- Used Stock images for testing the carousel.
+- Font: Poppins
 - Carosuel Images: 2000px width and >250KB.
-
----

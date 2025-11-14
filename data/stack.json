@@ -1,0 +1,58 @@
+{
+    "core": [
+        {
+            "icon": "JavaScript.svg", 
+            "label": "JavaScript"
+        }, 
+        {
+            "icon": "HTML5.svg", 
+            "label": "HTML"
+        },
+        {
+            "icon": "CSS3.svg", 
+            "label": "CSS"
+        },
+        {
+            "icon": "Vercel.svg",
+            "label": "Vercel"
+        },
+        {
+            "icon": "Render - White.svg",
+            "label": "Render"
+        },
+        {
+            "icon": "MongoDB.svg", 
+            "label": "MongoDB"
+        }
+    ], 
+    "familiar": [
+        {
+            "icon": "Firebase.svg", 
+            "label": "FireBase"
+        }, 
+        {
+            "icon": "C++.svg", 
+            "label": "C++"
+        }, 
+        {
+            "icon": "Java.svg", 
+            "label": "Java"
+        }, 
+        {
+            "icon": "React.svg", 
+            "label": "React.js"
+        }, 
+        {
+            "icon": "NodeJS.svg", 
+            "label": "Node.js"
+        }, 
+        {
+            "icon": "PHP.svg", 
+            "label": "PHP"
+        }, 
+        {
+            "icon": "Python.svg", 
+            "label": "Python"
+        }
+    ]
+}
