@@ -11,25 +11,9 @@
         {
             "icon": "CSS3.svg", 
             "label": "CSS"
-        },
-        {
-            "icon": "Vercel.svg",
-            "label": "Vercel"
-        },
-        {
-            "icon": "Render - White.svg",
-            "label": "Render"
-        },
-        {
-            "icon": "MongoDB.svg", 
-            "label": "MongoDB"
         }
     ], 
-    "familiar": [
-        {
-            "icon": "Firebase.svg", 
-            "label": "FireBase"
-        }, 
+    "familiar": [ 
         {
             "icon": "C++.svg", 
             "label": "C++"
@@ -53,6 +37,24 @@
         {
             "icon": "Python.svg", 
             "label": "Python"
+        }
+    ],
+    "platform": [
+        {
+            "icon": "Firebase.svg", 
+            "label": "FireBase"
+        },
+        {
+            "icon": "MongoDB.svg", 
+            "label": "MongoDB"
+        }, 
+        {
+            "icon": "Vercel.svg",
+            "label": "Vercel"
+        },
+        {
+            "icon": "Render - White.svg",
+            "label": "Render"
         }
     ]
 }

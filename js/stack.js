@@ -4,8 +4,9 @@ export function stack() {
 
     const coreContainer = document.querySelector('.stack-grid[data-stack-group="core"]');
     const familiarContainer = document.querySelector('.stack-grid[data-stack-group="familiar"]');
+    const platformContainer = document.querySelector('.stack-grid[data-stack-group="platform"]');
 
-    if (!coreContainer || !familiarContainer) {
+    if (!coreContainer || !familiarContainer || !platformContainer) {
         console.error('Stack containers not found in the DOM.');
         return;
     }
@@ -18,7 +19,7 @@ export function stack() {
             return response.json();
         })
         .then(data => { 
-            const { core = [], familiar = []} = data; 
+            const { core = [], familiar = [], platform = []} = data; 
 
             core.forEach(item => {
                 const tile = createStackTile(item, ICON_BASE_PATH);
@@ -28,6 +29,11 @@ export function stack() {
             familiar.forEach(item => {
                 const tile = createStackTile(item, ICON_BASE_PATH); 
                 familiarContainer.appendChild(tile);
+            });
+
+            platform.forEach(item => {
+                const tile = createStackTile(item, ICON_BASE_PATH);
+                platformContainer.appendChild(tile);
             });
         })
         .catch(error => console.error('Error loading stack data:', error));
