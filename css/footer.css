@@ -7,6 +7,73 @@
 } 
 
 footer {
-    position: fixed;
-    bottom: 0;
+    background: var(--secondary);
+    color: var(--text);
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.footer-section h4 {
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin: 6px 0;
+}
+
+.footer-section ul li a {
+    color: var(--text);
+    opacity: 0.75;
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.footer-section ul li a:hover {
+    opacity: 1;
+}
+
+.contact-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 12px;
+}
+
+.contact-icons li a img {
+    width: 26px;
+    height: 26px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.contact-icons li a img:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 13px;
+    opacity: 0.85;
 }

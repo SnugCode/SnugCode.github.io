@@ -1,0 +1,26 @@
+[
+  {
+    "label": "2023",
+    "title": "Started My Computer Science Degree",
+    "date": "March 2023",
+    "description": "Began my Bachelor of Computer Science (Software Development) and started building a foundation in programming, web development, and software engineering."
+  },
+  {
+    "label": "2023",
+    "title": "Built My First Web Portfolio",
+    "date": "August 2023",
+    "description": "Designed and coded my first personal web portfolio to showcase projects, coursework, and experiments with front-end technologies."
+  },
+  {
+    "label": "2024",
+    "title": "Capstone / Major Project",
+    "date": "2024",
+    "description": "Worked in a team to build a full-stack application, focusing on front-end architecture, API integration, and deployment workflows."
+  },
+  {
+    "label": "2025",
+    "title": "Freelance & Side Projects",
+    "date": "2025",
+    "description": "Took on side projects and small freelance-style tasks to sharpen my skills and gain real-world experience in modern web development."
+  }
+]
