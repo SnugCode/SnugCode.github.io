@@ -1,18 +1,22 @@
 export function about() {
-    startCarousel();
+    startTypingIntro();
 }
 
-function startCarousel() {
-    const images = document.querySelectorAll('#about .carousel img');
-    if (!images.length) return;
-    
+function startTypingIntro() {
+    const typingTarget = document.querySelector('#typing-text');
+    if (!typingTarget) return;
+
+    const text = "Hi! My name is SnugCode";
     let index = 0;
 
-    images[index].classList.add('active');
+    const typeNextCharacter = () => {
+        typingTarget.textContent = text.slice(0, index);
 
-    setInterval(() => {
-        images[index].classList.remove('active');
-        index = (index + 1) % images.length;
-        images[index].classList.add('active');
-    }, 4000);
+        if (index < text.length) {
+            index += 1;
+            setTimeout(typeNextCharacter, 90);
+        }
+    };
+
+    typeNextCharacter();
 }
