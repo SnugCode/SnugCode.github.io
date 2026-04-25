@@ -42,17 +42,27 @@ button:hover {
 .bg-secondary { background-color: var(--secondary); }
 .bg-accent { background-color: var(--accent); } 
 
-html { scroll-behavior: smooth; } 
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
 
-#about {
+section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+} 
+
+#intro {
     position: relative;
-    height: 66vh;
+    min-height: 100vh;
     display: flex; 
     align-items: center;
     justify-content: flex-start;
 }
 
-#about .text {
+#intro .text {
     position: relative;
     z-index: 2;
     width: min(700px, 100%);
@@ -63,12 +73,12 @@ html { scroll-behavior: smooth; }
     color: var(--text);
 }
 
-#about .text h2 {
+#intro .text h2 {
     margin-bottom: 1rem;
     color: var(--primary);
 }
 
-#about .text p {
+#intro .text p {
     line-height: 1.6;
 }
 
