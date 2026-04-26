@@ -10,11 +10,22 @@
     <link rel="stylesheet" href="css/typography.css">
     <link rel="stylesheet" href="css/main.css"> 
     <link rel="stylesheet" href="css/footer.css">
-    <!-- TODO: Add FavIcon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/Logo/FavIconBlack16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconBlack32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/Logo/FavIconBlack48.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/Logo/FavIconWhite16.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconWhite32.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/Logo/FavIconWhite48.png" media="(prefers-color-scheme: dark)">
 
     <title>SnugCode Profile</title>
 </head>
 <body>
+     <a class="site-logo" href="#intro" aria-label="SnugCode home">
+        <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+     </a>
+     <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+     </button>
      <section id="intro">
         <div class="text">
             <p class="typing-intro" aria-label="Hi! Nice to meet you. My name is SnugCode. Welcome to my portfolio. Feel free to poke around.">
@@ -66,6 +77,12 @@
     <!-- TODO: Expand on Footer -->
     <footer>
         <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#intro" aria-label="SnugCode home">
+                    <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+                </a>
+                <p>Developer portfolio, projects, and notes.</p>
+            </div>
             <div class="footer-section">
                 <h4>SiteMap</h4>
                 <ul>
