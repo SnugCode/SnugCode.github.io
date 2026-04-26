@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/typography.css">
     <link rel="stylesheet" href="css/main.css"> 
     <link rel="stylesheet" href="css/footer.css">
+    
     <link rel="icon" type="image/png" sizes="16x16" href="assets/Logo/FavIconBlack16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconBlack32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="assets/Logo/FavIconBlack48.png">
@@ -44,7 +45,21 @@
         <div class="grid">
         </div>
     </section>
-    <!-- TODO: Make Tiles click and lead to relevant pages-->
+    <script>
+        document.addEventListener('click', (event) => {
+            const card = event.target.closest('.project-card');
+            if (!card || event.target.closest('a')) return;
+
+            const link = card.querySelector('a[aria-label="My thoughts"], a[aria-label="Live site"], a[aria-label="GitHub"]');
+            if (link) {
+                if (link.target === '_blank') {
+                    window.open(link.href, '_blank', 'noopener');
+                } else {
+                    window.location.href = link.href;
+                }
+            }
+        });
+    </script>
      <section id="stack">
         <h1>Stack</h1>
         <div class="stack-group">
@@ -58,6 +73,35 @@
         <div class="stack-group">
             <h2>Platforms I use</h2>
             <div class="stack-grid" data-stack-group="platform"></div>
+        </div>
+     </section>
+     <section id="education">
+        <h1>Education</h1>
+        <div class="education-carousel" aria-label="Education history">
+            <article class="education-tile is-active">
+                <img src="assets/Logo/Swinburne.png" alt="Swinburne logo">
+                <div class="education-copy">
+                    <span class="education-org">Swinburne University of Technology</span>
+                    <span class="education-years">2024 - 2026</span>
+                    <span class="education-context">Add your Swinburne context here.</span>
+                </div>
+            </article>
+            <article class="education-tile">
+                <img src="assets/Logo/NCHS.png" alt="NCHS logo">
+                <div class="education-copy">
+                    <span class="education-org">Nawaloka College of Higher Studies</span>
+                    <span class="education-years">2023 - 2024</span>
+                    <span class="education-context">Add your NCHS context here.</span>
+                </div>
+            </article>
+            <article class="education-tile">
+                <img src="assets/Logo/AnandaCollegeCrest.png" alt="Ananda College crest">
+                <div class="education-copy">
+                    <span class="education-org">Ananda College</span>
+                    <span class="education-years">2009 - 2022</span>
+                    <span class="education-context">Add your Ananda College context here.</span>
+                </div>
+            </article>
         </div>
      </section>
      <!-- TODO: Add Timeline -->
@@ -89,6 +133,7 @@
                     <li><a href="#intro">About Me</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#stack">Stack</a></li>
+                    <li><a href="#education">Education</a></li>
                     <li><a href="#timeline">Timeline</a></li>
                     <li><a href="blog.html">Blog</a></li>
                 </ul>

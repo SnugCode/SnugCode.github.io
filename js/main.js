@@ -1,6 +1,7 @@
 import { about } from "./about.js";
 import { projects } from "./projects.js";
 import { stack } from "./stack.js";
+import { education } from "./education.js";
 import { timeline } from "./timeline.js";
 
 const siteTitle = "SnugCode Portfolio";
@@ -49,6 +50,7 @@ function init() {
     about();
     projects();
     stack(); 
+    education();
     timeline();
 }
 
