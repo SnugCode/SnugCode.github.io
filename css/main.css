@@ -214,11 +214,11 @@ footer {
 }
 
 .grid {
-    width: min(900px, 100%);
+    width: min(1100px, 100%);
     max-height: 100%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     align-items: center;
     gap: 1rem;
     min-height: 0;
@@ -228,7 +228,7 @@ footer {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   max-height: 100%;
@@ -245,8 +245,10 @@ footer {
 .project-media {
   margin: 0;
   aspect-ratio: 16 / 9;
-  max-height: min(42vh, 360px);
+  max-height: min(34vh, 300px);
   background: var(--media-bg);
+  border-radius: 7px 7px 0 0;
+  overflow: hidden;
 }
 
 .project-media img {
@@ -255,6 +257,22 @@ footer {
   object-fit: cover;
   display: block;
 } 
+
+.project-media-placeholder {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, rgba(26, 0, 223, 0.22), transparent 55%),
+    linear-gradient(315deg, rgba(228, 80, 0, 0.2), transparent 50%),
+    var(--media-bg);
+}
+
+.project-media-placeholder span {
+  color: var(--text);
+  font-size: clamp(3rem, 12vh, 6rem);
+  font-weight: 700;
+  line-height: 1;
+}
 
 .project-body {
   padding: clamp(0.8rem, 2vh, 1rem) 1.25rem 0.5rem;
@@ -282,6 +300,7 @@ footer {
 }
 
 .project-actions a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -299,6 +318,63 @@ footer {
   border-color: transparent;
   color: #fff;
   transform: translateY(-1px);
+}
+
+.project-actions a::before,
+.project-actions a::after {
+  position: absolute;
+  left: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 0.35rem);
+  transition: opacity .16s ease, transform .16s ease;
+  z-index: 2;
+}
+
+.project-actions a::before {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 0.65rem);
+  width: max-content;
+  max-width: 180px;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--secondary);
+  color: var(--text);
+  box-shadow: 0 8px 20px var(--shadow-strong);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+}
+
+.project-actions a::after {
+  content: "";
+  bottom: calc(100% + 0.32rem);
+  width: 0.65rem;
+  height: 0.65rem;
+  background: var(--secondary);
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+  transform: translate(-50%, 0.35rem) rotate(45deg);
+}
+
+.project-actions a:hover::before,
+.project-actions a:hover::after,
+.project-actions a:focus-visible::before,
+.project-actions a:focus-visible::after {
+  opacity: 1;
+}
+
+.project-actions a:hover::before,
+.project-actions a:focus-visible::before {
+  transform: translate(-50%, 0);
+}
+
+.project-actions a:hover::after,
+.project-actions a:focus-visible::after {
+  transform: translate(-50%, 0) rotate(45deg);
 }
 
 #stack {
@@ -600,4 +676,83 @@ footer {
   line-height: 1.7;
   color: var(--muted-text);
   max-width: 600px;
+}
+
+.thought-page {
+  min-height: 100vh;
+  padding: 7rem 1.5rem 4rem;
+  box-sizing: border-box;
+}
+
+.thought-article {
+  width: min(820px, 100%);
+  margin: 0 auto;
+}
+
+.thought-back-link,
+.thought-kicker {
+  color: var(--subtle-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.thought-back-link {
+  display: inline-flex;
+  margin-bottom: 2rem;
+}
+
+.thought-back-link:hover {
+  color: var(--accent);
+}
+
+.thought-kicker {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.thought-article h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 1;
+}
+
+.thought-article h2 {
+  margin: 2.5rem 0 0.75rem;
+  font-size: clamp(1.5rem, 4vw, 2.369rem);
+  line-height: 1.15;
+}
+
+.thought-article p {
+  color: var(--muted-text);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.thought-lede {
+  color: var(--text);
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+  line-height: 1.55;
+}
+
+.thought-actions {
+  margin-top: 2.5rem;
+}
+
+.thought-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--secondary);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.thought-actions a:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: transparent;
 }

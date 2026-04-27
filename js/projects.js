@@ -18,19 +18,25 @@ function cardHTML(p) {
         { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]
         )
     );
+    const media = p.image
+        ? `<figure class="project-media">
+                <img src="${esc(p.image)}" alt="${esc(p.title)} cover">
+            </figure>`
+        : `<div class="project-media project-media-placeholder" aria-hidden="true">
+                <span>${esc(p.title).slice(0, 1)}</span>
+            </div>`;
+
     return `
         <article class="project-card">
-            <figure class="project-media">
-                <img src="${esc(p.image)}" alt="${esc(p.title)} cover">
-            </figure>
+            ${media}
             <div class="project-body">
                 <h3>${esc(p.title)}</h3>
                 <p>${esc(p.summary)}</p>
             </div>
             <div class="project-actions">
-                ${p.repo ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" aria-label="GitHub">${iconGitHub}</a>` : ''}
-                ${p.live ? `<a href="${esc(p.live)}" target="_blank" rel="noopener" aria-label="Live site">${iconExternal}</a>` : ''}
-                ${p.thoughts ? `<a href="${esc(p.thoughts)}" aria-label="My thoughts">${iconNotes}</a>` : ''}
+                ${p.repo ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub Repo">${iconGitHub}</a>` : ''}
+                ${p.live ? `<a href="${esc(p.live)}" target="_blank" rel="noopener" aria-label="Live site" data-tooltip="Go to Live Website">${iconExternal}</a>` : ''}
+                ${p.thoughts ? `<a href="${esc(p.thoughts)}" aria-label="My thoughts" data-tooltip="My Thoughts">${iconNotes}</a>` : ''}
             </div>
         </article>`;
 } 

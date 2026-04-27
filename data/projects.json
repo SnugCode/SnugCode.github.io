@@ -6,5 +6,11 @@
     "repo": "https://github.com/JarridBartle/the-avenue-school",
     "live": "https://theavenueschool.vic.edu.au/",
     "thoughts": "thoughts/TAS.html"
+  },
+  {
+    "title": "Kubera",
+    "summary": "A local personal finance tracker for keeping money, spending, and habits easier to understand.",
+    "repo": "https://github.com/SnugCode/Kubera",
+    "thoughts": "thoughts/Kubera.html"
   }
 ]
