@@ -18,6 +18,7 @@
   {
     "title": "Ceylon Vale",
     "summary": "A marketing website for presenting the Ceylon Vale brand and its online presence.",
+    "image": "../assets/projects/ceylon-vale-logo.png",
     "repo": "https://github.com/20230093Buddila/Project0MartketingWebsite",
     "live": "https://20230093buddila.github.io/Project0MartketingWebsite/",
     "status": "Ongoing"
