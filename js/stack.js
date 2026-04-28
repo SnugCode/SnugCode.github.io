@@ -2,11 +2,9 @@ export function stack() {
     const STACK_DATA_URL = '../data/stack.json';
     const ICON_BASE_PATH = '../assets/icons/';
 
-    const coreContainer = document.querySelector('.stack-grid[data-stack-group="core"]');
-    const familiarContainer = document.querySelector('.stack-grid[data-stack-group="familiar"]');
-    const platformContainer = document.querySelector('.stack-grid[data-stack-group="platform"]');
+    const stackContainers = document.querySelectorAll('.stack-grid[data-stack-group]');
 
-    if (!coreContainer || !familiarContainer || !platformContainer) {
+    if (!stackContainers.length) {
         console.error('Stack containers not found in the DOM.');
         return;
     }
@@ -19,21 +17,14 @@ export function stack() {
             return response.json();
         })
         .then(data => { 
-            const { core = [], familiar = [], platform = []} = data; 
+            stackContainers.forEach(container => {
+                const group = container.dataset.stackGroup;
+                const items = data[group] || [];
 
-            core.forEach(item => {
-                const tile = createStackTile(item, ICON_BASE_PATH);
-                coreContainer.appendChild(tile);
-            }); 
-
-            familiar.forEach(item => {
-                const tile = createStackTile(item, ICON_BASE_PATH); 
-                familiarContainer.appendChild(tile);
-            });
-
-            platform.forEach(item => {
-                const tile = createStackTile(item, ICON_BASE_PATH);
-                platformContainer.appendChild(tile);
+                items.forEach(item => {
+                    const tile = createStackTile(item, ICON_BASE_PATH);
+                    container.appendChild(tile);
+                });
             });
         })
         .catch(error => console.error('Error loading stack data:', error));

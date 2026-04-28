@@ -1,48 +1,48 @@
 {
-    "core": [
+    "frontend": [
         {
-            "icon": "JavaScript.svg", 
-            "label": "JavaScript"
-        }, 
-        {
-            "icon": "HTML5.svg", 
+            "icon": "HTML5.svg",
             "label": "HTML"
         },
         {
-            "icon": "CSS3.svg", 
+            "icon": "CSS3.svg",
             "label": "CSS"
+        },
+        {
+            "icon": "JavaScript.svg", 
+            "label": "JavaScript"
+        },
+        {
+            "icon": "TypeScript.svg",
+            "label": "TypeScript"
+        },
+        {
+            "icon": "React.svg",
+            "label": "React.js"
         }
     ], 
-    "familiar": [ 
+    "backend": [
         {
-            "icon": "C++.svg", 
-            "label": "C++"
-        }, 
+            "icon": "NodeJS.svg",
+            "label": "Node.js"
+        },
+        {
+            "icon": "PHP.svg",
+            "label": "PHP"
+        },
         {
             "icon": "Java.svg", 
             "label": "Java"
-        }, 
-        {
-            "icon": "React.svg", 
-            "label": "React.js"
-        }, 
-        {
-            "icon": "NodeJS.svg", 
-            "label": "Node.js"
-        }, 
-        {
-            "icon": "PHP.svg", 
-            "label": "PHP"
         }, 
         {
             "icon": "Python.svg", 
             "label": "Python"
         }
     ],
-    "platform": [
+    "dataCloud": [
         {
             "icon": "Firebase.svg", 
-            "label": "FireBase"
+            "label": "Firebase"
         },
         {
             "icon": "MongoDB.svg", 
@@ -55,6 +55,12 @@
         {
             "icon": "Render - White.svg",
             "label": "Render"
+        }
+    ],
+    "systemsTools": [
+        {
+            "icon": "C++.svg", 
+            "label": "C++"
         }
     ]
 }
