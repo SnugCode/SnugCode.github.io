@@ -5,12 +5,21 @@
     "image": "../assets/projects/TAS.png",
     "repo": "https://github.com/JarridBartle/the-avenue-school",
     "live": "https://theavenueschool.vic.edu.au/",
-    "thoughts": "thoughts/TAS.html"
+    "thoughts": "thoughts/TAS.html",
+    "status": "Completed"
   },
   {
     "title": "Kubera",
     "summary": "A local personal finance tracker for keeping money, spending, and habits easier to understand.",
     "repo": "https://github.com/SnugCode/Kubera",
-    "thoughts": "thoughts/Kubera.html"
+    "thoughts": "thoughts/Kubera.html",
+    "status": "Ongoing"
+  },
+  {
+    "title": "Ceylon Vale",
+    "summary": "A marketing website for presenting the Ceylon Vale brand and its online presence.",
+    "repo": "https://github.com/20230093Buddila/Project0MartketingWebsite",
+    "live": "https://20230093buddila.github.io/Project0MartketingWebsite/",
+    "status": "Ongoing"
   }
 ]

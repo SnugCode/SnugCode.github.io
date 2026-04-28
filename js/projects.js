@@ -18,6 +18,7 @@ function cardHTML(p) {
         { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]
         )
     );
+    const statusClass = String(p.status ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
     const media = p.image
         ? `<figure class="project-media">
                 <img src="${esc(p.image)}" alt="${esc(p.title)} cover">
@@ -32,6 +33,7 @@ function cardHTML(p) {
             <div class="project-body">
                 <h3>${esc(p.title)}</h3>
                 <p>${esc(p.summary)}</p>
+                ${p.status ? `<p class="project-status">Status: <span class="project-status-${esc(statusClass)}">${esc(p.status)}</span></p>` : ''}
             </div>
             <div class="project-actions">
                 ${p.repo ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub Repo">${iconGitHub}</a>` : ''}

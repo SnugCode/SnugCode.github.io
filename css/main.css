@@ -292,6 +292,23 @@ footer {
   font-size: clamp(0.9rem, 2vh, 1rem);
 }
 
+.project-status {
+  color: var(--muted-text);
+  font-weight: 600;
+}
+
+.project-status span {
+  font-weight: 700;
+}
+
+.project-status-completed {
+  color: #2fb344;
+}
+
+.project-status-ongoing {
+  color: #f59f00;
+}
+
 .project-actions {
   display: flex;
   gap: .75rem;
