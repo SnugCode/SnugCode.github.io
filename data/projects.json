@@ -4,6 +4,7 @@
     "summary": "My Capstone Project from my final year of University.",
     "image": "../assets/projects/TAS.png",
     "repo": "https://github.com/JarridBartle/the-avenue-school",
+    "repoPrivate": true,
     "live": "https://theavenueschool.vic.edu.au/",
     "thoughts": "thoughts/TAS.html",
     "status": "Completed"
@@ -20,6 +21,7 @@
     "summary": "A marketing website for presenting the Ceylon Vale brand and its online presence.",
     "image": "../assets/projects/ceylon-vale-logo.png",
     "repo": "https://github.com/20230093Buddila/Project0MartketingWebsite",
+    "repoPrivate": true,
     "live": "https://20230093buddila.github.io/Project0MartketingWebsite/",
     "status": "Ongoing"
   }

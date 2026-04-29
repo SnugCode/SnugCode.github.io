@@ -19,6 +19,14 @@ function cardHTML(p) {
         )
     );
     const statusClass = String(p.status ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const repoAction = p.repoPrivate
+        ? `<a class="project-action-disabled" aria-label="GitHub" aria-disabled="true" data-tooltip="This Github Repo is Private">${iconGitHub}</a>`
+        : p.repo
+            ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub Repo">${iconGitHub}</a>`
+            : '';
+    const thoughtsAction = p.thoughts
+        ? `<a class="project-action-disabled" aria-label="My thoughts" aria-disabled="true" data-tooltip="My Thoughts are WIP">${iconNotes}</a>`
+        : '';
     const media = p.image
         ? `<figure class="project-media">
                 <img src="${esc(p.image)}" alt="${esc(p.title)} cover">
@@ -36,9 +44,9 @@ function cardHTML(p) {
                 ${p.status ? `<p class="project-status">Status: <span class="project-status-${esc(statusClass)}">${esc(p.status)}</span></p>` : ''}
             </div>
             <div class="project-actions">
-                ${p.repo ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub Repo">${iconGitHub}</a>` : ''}
+                ${repoAction}
                 ${p.live ? `<a href="${esc(p.live)}" target="_blank" rel="noopener" aria-label="Live site" data-tooltip="Go to Live Website">${iconExternal}</a>` : ''}
-                ${p.thoughts ? `<a href="${esc(p.thoughts)}" aria-label="My thoughts" data-tooltip="My Thoughts">${iconNotes}</a>` : ''}
+                ${thoughtsAction}
             </div>
         </article>`;
 } 

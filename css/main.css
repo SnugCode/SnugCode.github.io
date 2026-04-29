@@ -90,7 +90,7 @@ footer {
 }
 
 .site-logo {
-    position: fixed;
+    position: absolute;
     top: 1.5rem;
     left: 1.5rem;
     z-index: 10;
@@ -105,7 +105,7 @@ footer {
 }
 
 .theme-toggle {
-    position: fixed;
+    position: absolute;
     top: 1.5rem;
     right: 1.5rem;
     z-index: 10;
@@ -335,6 +335,24 @@ footer {
   border-color: transparent;
   color: #fff;
   transform: translateY(-1px);
+}
+
+.project-actions a.project-action-disabled {
+  color: #8a8f98;
+  background:
+    linear-gradient(to bottom left, transparent calc(50% - 1px), #6f7480 50%, transparent calc(50% + 1px)),
+    #d6d8dc;
+  border-color: #b8bcc4;
+  cursor: not-allowed;
+}
+
+.project-actions a.project-action-disabled:hover {
+  color: #8a8f98;
+  background:
+    linear-gradient(to bottom left, transparent calc(50% - 1px), #6f7480 50%, transparent calc(50% + 1px)),
+    #d6d8dc;
+  border-color: #b8bcc4;
+  transform: none;
 }
 
 .project-actions a::before,
