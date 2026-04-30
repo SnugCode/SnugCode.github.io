@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="blog-document">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,5 +19,151 @@
     <title>SnugCode Blog</title>
 </head>
 <body>
+    <a class="site-logo" href="index.html#intro" aria-label="SnugCode home">
+        <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main class="blog-page">
+        <header class="blog-hero">
+            <a class="blog-back-link" href="index.html#intro">Back to portfolio</a>
+            <p class="blog-kicker">SnugCode writing</p>
+            <h1>Blog</h1>
+            <p>
+                A central home for project notes, build logs, and the occasional longer thought while I keep learning, shipping, and refining my work.
+            </p>
+        </header>
+
+        <section class="blog-section" aria-labelledby="latest-writing">
+            <div class="blog-section-heading">
+                <h2 id="latest-writing">Latest Thoughts</h2>
+                <p>Notes connected to the projects in my portfolio.</p>
+            </div>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div>
+                        <p class="blog-card-meta">Project thoughts</p>
+                        <h3>Kubera</h3>
+                        <p>
+                            Reflections on building a local personal finance tracker around privacy, clarity, and everyday money habits.
+                        </p>
+                    </div>
+                    <a class="blog-card-link" href="thoughts/Kubera.html">Read notes</a>
+                </article>
+
+                <article class="blog-card blog-card-disabled">
+                    <div>
+                        <p class="blog-card-meta">Project thoughts</p>
+                        <h3>The Avenue School</h3>
+                        <p>
+                            A future writeup on the capstone process, redesign decisions, and what changed across the build.
+                        </p>
+                    </div>
+                    <span class="blog-card-link blog-card-link-disabled">WIP</span>
+                </article>
+
+                <article class="blog-card blog-card-disabled">
+                    <div>
+                        <p class="blog-card-meta">Project thoughts</p>
+                        <h3>Ceylon Vale</h3>
+                        <p>
+                            Notes on shaping a small marketing site, brand presentation, and the practical tradeoffs behind it.
+                        </p>
+                    </div>
+                    <span class="blog-card-link blog-card-link-disabled">WIP</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="blog-section" aria-labelledby="future-writing">
+            <div class="blog-section-heading">
+                <h2 id="future-writing">Future Notes</h2>
+                <p>Space for essays, experiments, and small lessons that do not belong to one project.</p>
+            </div>
+
+            <div class="blog-empty-state">
+                <h3>More writing soon</h3>
+                <p>
+                    This hub is ready for new posts as they come together. For now, the project notes are the starting shelf.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html#intro" aria-label="SnugCode home">
+                    <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+                </a>
+                <p>Developer portfolio, projects, and notes.</p>
+            </div>
+            <div class="footer-section">
+                <h4>SiteMap</h4>
+                <ul>
+                    <li><a href="index.html#intro">About Me</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#stack">Stack</a></li>
+                    <li><a href="index.html#education">Education</a></li>
+                    <li><a href="index.html#timeline">Timeline</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul class="contact-icons">
+                    <li><a href="mailto:snugcode@proton.me"><img src="assets/icons/mail.png" alt="Email"></a></li>
+                    <li><a href="https://github.com/SnugCode"><img src="assets/icons/github-white.svg" alt="GitHub"></a></li>
+                    <li><a href="https://www.linkedin.com/in/snugcode/"><img src="assets/icons/LinkedIn.svg" alt="LinkedIn"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <small>&copy; 2025 SnugCode. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script>
+        const logoSources = {
+            dark: "assets/Logo/LogoWhite.png",
+            light: "assets/Logo/LogoBlack.png"
+        };
+
+        function setTheme(theme) {
+            const selectedTheme = theme === "light" ? "light" : "dark";
+            const isDark = selectedTheme === "dark";
+            const themeToggle = document.querySelector(".theme-toggle");
+
+            document.documentElement.dataset.theme = selectedTheme;
+            localStorage.setItem("theme", selectedTheme);
+
+            document.querySelectorAll(".theme-logo").forEach((logo) => {
+                logo.src = logoSources[selectedTheme];
+            });
+
+            if (themeToggle) {
+                themeToggle.setAttribute("aria-pressed", String(isDark));
+                themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+                themeToggle.querySelector(".theme-toggle-icon").textContent = isDark ? "☾" : "☀";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const storedTheme = localStorage.getItem("theme") || "dark";
+            const themeToggle = document.querySelector(".theme-toggle");
+
+            setTheme(storedTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener("click", () => {
+                    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+                    setTheme(nextTheme);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
