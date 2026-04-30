@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="dashboard-document">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SnugCode">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Edit SnugCode intro text">
+
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconBlack32.png">
+
+    <title>Edit Intro | SnugCode Dashboard</title>
+</head>
+<body>
+    <a class="site-logo" href="dashboard.html" aria-label="Dashboard home">
+        <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main class="dashboard-page">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-kicker">Edit Portfolio</p>
+                <h1>Intro Text</h1>
+            </div>
+            <p class="dashboard-url">Direct URL only</p>
+        </header>
+
+        <section id="dashboard-auth" class="dashboard-auth" aria-label="Dashboard sign in">
+            <form id="dashboard-login-form" class="dashboard-form">
+                <label>
+                    Email
+                    <input id="dashboard-email" type="email" autocomplete="email" placeholder="you@example.com">
+                </label>
+                <label>
+                    Password
+                    <input id="dashboard-password" type="password" autocomplete="current-password">
+                </label>
+                <button type="submit">Sign In</button>
+            </form>
+            <button id="dashboard-logout" type="button">Sign Out</button>
+            <p id="dashboard-status">Firebase status loading.</p>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Intro editor">
+            <article class="dashboard-panel dashboard-panel-wide">
+                <div class="dashboard-panel-heading">
+                    <h2>Intro Text</h2>
+                    <a href="index.html#intro">Preview</a>
+                </div>
+                <form id="intro-form" class="dashboard-form">
+                    <label>
+                        Text
+                        <input id="intro-text" type="text" maxlength="90" placeholder="Welcome to my portfolio.">
+                    </label>
+                    <label>
+                        Line
+                        <select id="intro-line">
+                            <option value="1">Top line</option>
+                            <option value="2">Bottom line</option>
+                        </select>
+                    </label>
+                    <label>
+                        Start after
+                        <input id="intro-delay" type="number" min="0" step="100" value="0">
+                    </label>
+                    <label>
+                        Type speed
+                        <input id="intro-speed" type="number" min="20" step="10" value="90">
+                    </label>
+                    <button type="submit">Add Text</button>
+                </form>
+                <div class="dashboard-panel-actions">
+                    <button id="intro-reset" type="button">Reset Intro</button>
+                    <button id="intro-clear" type="button">Clear All</button>
+                    <button id="intro-publish" type="button" disabled>Publish to Firebase</button>
+                </div>
+                <div id="intro-sequence-list" class="dashboard-list"></div>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

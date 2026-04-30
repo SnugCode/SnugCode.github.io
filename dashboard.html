@@ -71,39 +71,24 @@
         </section>
 
         <section class="dashboard-grid" aria-label="Dashboard panels">
-            <article class="dashboard-panel dashboard-panel-wide">
+            <article class="dashboard-panel dashboard-panel-wide dashboard-edit-portfolio">
                 <div class="dashboard-panel-heading">
-                    <h2>Intro Text</h2>
-                    <a href="index.html#intro">Preview</a>
+                    <h2>Edit Portfolio</h2>
+                    <a href="index.html">Preview Site</a>
                 </div>
-                <form id="intro-form" class="dashboard-form">
-                    <label>
-                        Text
-                        <input id="intro-text" type="text" maxlength="90" placeholder="Welcome to my portfolio.">
-                    </label>
-                    <label>
-                        Line
-                        <select id="intro-line">
-                            <option value="1">Top line</option>
-                            <option value="2">Bottom line</option>
-                        </select>
-                    </label>
-                    <label>
-                        Start after
-                        <input id="intro-delay" type="number" min="0" step="100" value="0">
-                    </label>
-                    <label>
-                        Type speed
-                        <input id="intro-speed" type="number" min="20" step="10" value="90">
-                    </label>
-                    <button type="submit">Add Text</button>
-                </form>
-                <div class="dashboard-panel-actions">
-                    <button id="intro-reset" type="button">Reset Intro</button>
-                    <button id="intro-clear" type="button">Clear All</button>
-                    <button id="intro-publish" type="button" disabled>Publish to Firebase</button>
+                <p class="dashboard-panel-copy">
+                    Choose a portfolio section to update. These pages are only reachable from the direct dashboard flow.
+                </p>
+                <div class="dashboard-edit-links">
+                    <a href="dashboard-intro.html">
+                        <span>Intro Text</span>
+                        <small>Edit the animated landing text and timing.</small>
+                    </a>
+                    <a href="dashboard-projects.html">
+                        <span>Projects</span>
+                        <small>Add, remove, and publish portfolio projects.</small>
+                    </a>
                 </div>
-                <div id="intro-sequence-list" class="dashboard-list"></div>
             </article>
 
             <article class="dashboard-panel dashboard-panel-wide">

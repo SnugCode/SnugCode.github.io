@@ -137,6 +137,5 @@ function normalizeIntroSequence(sequence) {
             delay: Math.max(0, Number(item.delay) || 0),
             speed: Math.max(20, Number(item.speed) || 90)
         }))
-        .filter((item) => item.text)
-        .sort((a, b) => a.delay - b.delay);
+        .filter((item) => item.text);
 }

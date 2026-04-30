@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" class="dashboard-document">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SnugCode">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Edit SnugCode projects">
+
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconBlack32.png">
+
+    <title>Edit Projects | SnugCode Dashboard</title>
+</head>
+<body>
+    <a class="site-logo" href="dashboard.html" aria-label="Dashboard home">
+        <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main class="dashboard-page">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-kicker">Edit Portfolio</p>
+                <h1>Projects</h1>
+            </div>
+            <p class="dashboard-url">Direct URL only</p>
+        </header>
+
+        <section id="dashboard-auth" class="dashboard-auth" aria-label="Dashboard sign in">
+            <form id="dashboard-login-form" class="dashboard-form">
+                <label>
+                    Email
+                    <input id="dashboard-email" type="email" autocomplete="email" placeholder="you@example.com">
+                </label>
+                <label>
+                    Password
+                    <input id="dashboard-password" type="password" autocomplete="current-password">
+                </label>
+                <button type="submit">Sign In</button>
+            </form>
+            <button id="dashboard-logout" type="button">Sign Out</button>
+            <p id="dashboard-status">Firebase status loading.</p>
+        </section>
+
+        <section class="dashboard-grid" aria-label="Projects editor">
+            <article class="dashboard-panel dashboard-panel-wide">
+                <div class="dashboard-panel-heading">
+                    <h2>Projects</h2>
+                    <a href="index.html#projects">Preview</a>
+                </div>
+                <form id="project-form" class="dashboard-form dashboard-project-form">
+                    <label>
+                        Title
+                        <input id="project-title" type="text" maxlength="90" placeholder="Project name">
+                    </label>
+                    <label>
+                        Description
+                        <textarea id="project-summary" rows="3" maxlength="220" placeholder="Short project description"></textarea>
+                    </label>
+                    <label>
+                        GitHub Repo
+                        <input id="project-repo" type="url" placeholder="https://github.com/...">
+                    </label>
+                    <label>
+                        Live Website
+                        <input id="project-live" type="url" placeholder="https://...">
+                    </label>
+                    <label>
+                        Blog Link
+                        <input id="project-thoughts" type="text" placeholder="thoughts/example.html">
+                    </label>
+                    <label>
+                        Status
+                        <select id="project-status">
+                            <option value="Ongoing">Ongoing</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </label>
+                    <label class="dashboard-checkbox-label">
+                        <input id="project-private" type="checkbox">
+                        Private repo
+                    </label>
+                    <button type="submit">Add Project</button>
+                </form>
+                <div class="dashboard-panel-actions">
+                    <button id="projects-reset" type="button">Reset Projects</button>
+                    <button id="projects-publish" type="button" disabled>Publish to Firebase</button>
+                </div>
+                <div id="dashboard-projects" class="dashboard-list"></div>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

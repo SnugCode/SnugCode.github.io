@@ -1,16 +1,33 @@
+import { getPortfolioContent, isFirebaseConfigured } from "./firebase.js";
+
 export async function projects() {
     const grid = document.querySelector(".grid");
     if (!grid) return;
 
     try {
-        const res = await fetch('../data/projects.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to fetch projects data'); 
-        const projects = await res.json();
-        grid.innerHTML = projects.map(cardHTML).join('');
+        const projectData = await getProjectData();
+        grid.innerHTML = projectData.map(cardHTML).join('');
     } catch (e) {
         console.error('Error loading projects:', e); 
         grid.innerHTML = '<p class="error">Failed to load projects. Please try again later.</p>';
     }
+}
+
+async function getProjectData() {
+    if (isFirebaseConfigured) {
+        try {
+            const content = await getPortfolioContent();
+            if (Array.isArray(content?.projects) && content.projects.length) {
+                return content.projects;
+            }
+        } catch (error) {
+            console.error("Error loading Firebase projects:", error);
+        }
+    }
+
+    const res = await fetch('../data/projects.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch projects data');
+    return res.json();
 }
 
 function cardHTML(p) {
