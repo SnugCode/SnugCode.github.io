@@ -1,0 +1,32 @@
+[
+  {
+    "text": "Hi!",
+    "line": 1,
+    "delay": 0,
+    "speed": 140
+  },
+  {
+    "text": "Nice to meet you.",
+    "line": 2,
+    "delay": 2200,
+    "speed": 90
+  },
+  {
+    "text": "My name is SnugCode.",
+    "line": 1,
+    "delay": 5600,
+    "speed": 90
+  },
+  {
+    "text": "Welcome to my portfolio.",
+    "line": 1,
+    "delay": 9200,
+    "speed": 90
+  },
+  {
+    "text": "Feel free to poke around.",
+    "line": 2,
+    "delay": 11600,
+    "speed": 90
+  }
+]
