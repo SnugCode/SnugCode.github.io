@@ -1,7 +1,6 @@
 import {
     getPortfolioContent,
     isFirebaseConfigured,
-    login,
     logout,
     savePortfolioContent,
     watchAuth
@@ -228,14 +227,14 @@ async function loadPublishedIntro() {
 
 function initAuth() {
     const authPanel = document.querySelector("#dashboard-auth");
-    const authForm = document.querySelector("#dashboard-login-form");
     const logoutButton = document.querySelector("#dashboard-logout");
     const publishButton = document.querySelector("#intro-publish");
     const projectsPublishButton = document.querySelector("#projects-publish");
 
     if (!isFirebaseConfigured) {
         authPanel.classList.add("dashboard-auth-warning");
-        setStatus("Paste your Firebase config in js/firebase.js to enable login and publishing.");
+        document.documentElement.dataset.dashboardAuth = "signed-out";
+        setStatus("Unauthorized access.");
         if (publishButton) publishButton.disabled = true;
         if (projectsPublishButton) projectsPublishButton.disabled = true;
         return;
@@ -246,25 +245,15 @@ function initAuth() {
         document.documentElement.dataset.dashboardAuth = isSignedIn ? "signed-in" : "signed-out";
         if (publishButton) publishButton.disabled = !isSignedIn;
         if (projectsPublishButton) projectsPublishButton.disabled = !isSignedIn;
-        setStatus(isSignedIn ? `Signed in as ${user.email}.` : "Sign in to publish dashboard changes.");
+        setStatus(isSignedIn ? `Signed in as ${user.email}.` : "Unauthorized access.");
     }).catch((error) => {
+        document.documentElement.dataset.dashboardAuth = "signed-out";
         setStatus(error.message);
-    });
-
-    authForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const email = document.querySelector("#dashboard-email").value.trim();
-        const password = document.querySelector("#dashboard-password").value;
-
-        try {
-            await login(email, password);
-        } catch (error) {
-            setStatus(error.message);
-        }
     });
 
     logoutButton.addEventListener("click", async () => {
         await logout();
+        window.location.href = "login.html";
     });
 }
 

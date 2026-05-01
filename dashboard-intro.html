@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dashboard-document">
+<html lang="en" class="dashboard-document" data-dashboard-auth="signed-out">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,23 +30,19 @@
             <p class="dashboard-url">Direct URL only</p>
         </header>
 
-        <section id="dashboard-auth" class="dashboard-auth" aria-label="Dashboard sign in">
-            <form id="dashboard-login-form" class="dashboard-form">
-                <label>
-                    Email
-                    <input id="dashboard-email" type="email" autocomplete="email" placeholder="you@example.com">
-                </label>
-                <label>
-                    Password
-                    <input id="dashboard-password" type="password" autocomplete="current-password">
-                </label>
-                <button type="submit">Sign In</button>
-            </form>
+        <section id="dashboard-auth" class="dashboard-auth dashboard-auth-bar" aria-label="Dashboard session">
+            <p id="dashboard-status">Checking dashboard access.</p>
             <button id="dashboard-logout" type="button">Sign Out</button>
-            <p id="dashboard-status">Firebase status loading.</p>
         </section>
 
-        <section class="dashboard-grid" aria-label="Intro editor">
+        <section id="dashboard-unauthorized" class="dashboard-panel dashboard-unauthorized" aria-label="Unauthorized access">
+            <p class="dashboard-kicker">Unauthorized Access</p>
+            <h2>Unauthorized access</h2>
+            <p>This dashboard is private. Sign in from the login page to continue.</p>
+            <a class="dashboard-auth-link" href="login.html">Go to Login</a>
+        </section>
+
+        <section class="dashboard-grid dashboard-protected" aria-label="Intro editor">
             <article class="dashboard-panel dashboard-panel-wide">
                 <div class="dashboard-panel-heading">
                     <h2>Intro Text</h2>
