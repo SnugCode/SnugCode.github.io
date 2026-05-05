@@ -2,7 +2,6 @@ import { about } from "./about.js";
 import { projects } from "./projects.js";
 import { stack } from "./stack.js";
 import { education } from "./education.js";
-import { timeline } from "./timeline.js";
 
 const siteTitle = "SnugCode Portfolio";
 const currentYear = new Date().getFullYear();
@@ -51,7 +50,6 @@ function init() {
     projects();
     stack(); 
     education();
-    timeline();
 }
 
 document.addEventListener("DOMContentLoaded", init);
