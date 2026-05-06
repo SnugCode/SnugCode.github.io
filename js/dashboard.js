@@ -4,11 +4,11 @@ import {
     logout,
     savePortfolioContent,
     watchAuth
-} from "./firebase.js";
+} from "../storage/firebase.js";
 
 const logoSources = {
-    dark: "assets/Logo/LogoWhite.png",
-    light: "assets/Logo/LogoBlack.png"
+    dark: "../../assets/Logo/LogoWhite.png",
+    light: "../../assets/Logo/LogoBlack.png"
 };
 const introStorageKey = "snugcodeIntroSequence";
 const projectsStorageKey = "snugcodeProjects";
@@ -130,7 +130,7 @@ function renderIntroSequence() {
 }
 
 async function loadDefaultIntroSequence() {
-    const response = await fetch("data/intro.json", { cache: "no-store" });
+    const response = await fetch("../../data/intro.json", { cache: "no-store" });
     defaultIntroSequence = await response.json();
 
     if (!getIntroSequence().length) {
@@ -140,7 +140,7 @@ async function loadDefaultIntroSequence() {
 }
 
 async function loadDefaultProjects() {
-    const response = await fetch("data/projects.json", { cache: "no-store" });
+    const response = await fetch("../../data/projects.json", { cache: "no-store" });
     defaultProjects = await response.json();
 
     if (!getProjectsDraft().length) {
@@ -149,7 +149,7 @@ async function loadDefaultProjects() {
 }
 
 async function loadDefaultStack() {
-    const response = await fetch("data/stack.json", { cache: "no-store" });
+    const response = await fetch("../../data/stack.json", { cache: "no-store" });
     defaultStack = normalizeStack(await response.json());
 
     if (!Object.values(getStackDraft()).some((items) => items.length)) {
@@ -158,7 +158,7 @@ async function loadDefaultStack() {
 }
 
 async function loadDefaultEducation() {
-    const response = await fetch("data/education.json", { cache: "no-store" });
+    const response = await fetch("../../data/education.json", { cache: "no-store" });
     defaultEducation = normalizeEducation(await response.json());
 
     if (!getEducationDraft().length) {
@@ -341,7 +341,7 @@ function getStackIconSource(icon) {
         return source;
     }
 
-    return `assets/icons/${source}`;
+    return `../../assets/icons/${source}`;
 }
 
 function renderStack() {
@@ -565,7 +565,7 @@ function getEducationLogoSource(logo) {
         return source;
     }
 
-    return source;
+    return `../../${source}`;
 }
 
 function renderEducation() {

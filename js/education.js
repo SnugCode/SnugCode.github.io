@@ -1,4 +1,4 @@
-import { getPortfolioContent, isFirebaseConfigured } from "./firebase.js";
+import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
 
 export async function education() {
     const carousel = document.querySelector(".education-carousel");
@@ -43,7 +43,7 @@ async function getEducationData() {
         // Ignore malformed local drafts and fall back to static data.
     }
 
-    const response = await fetch("../data/education.json", { cache: "no-store" });
+    const response = await fetch("data/education.json", { cache: "no-store" });
     if (!response.ok) throw new Error("Failed to load education.json");
     return normalizeEducation(await response.json());
 }

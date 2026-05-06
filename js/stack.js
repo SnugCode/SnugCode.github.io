@@ -1,8 +1,8 @@
-import { getPortfolioContent, isFirebaseConfigured } from "./firebase.js";
+import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
 
 export function stack() { 
-    const STACK_DATA_URL = '../data/stack.json';
-    const ICON_BASE_PATH = '../assets/icons/';
+    const STACK_DATA_URL = 'data/stack.json';
+    const ICON_BASE_PATH = 'assets/icons/';
 
     const stackContainers = document.querySelectorAll('.stack-grid[data-stack-group]');
 

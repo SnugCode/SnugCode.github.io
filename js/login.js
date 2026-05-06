@@ -1,8 +1,8 @@
-import { isFirebaseConfigured, login, watchAuth } from "./firebase.js";
+import { isFirebaseConfigured, login, watchAuth } from "../storage/firebase.js";
 
 const logoSources = {
-    dark: "assets/Logo/LogoWhite.png",
-    light: "assets/Logo/LogoBlack.png"
+    dark: "../../assets/Logo/LogoWhite.png",
+    light: "../../assets/Logo/LogoBlack.png"
 };
 
 function setTheme(theme) {

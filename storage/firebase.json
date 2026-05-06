@@ -1,0 +1,41 @@
+{
+  "firestore": {
+    "rules": "storage/firestore.rules"
+  },
+  "hosting": {
+    "public": ".",
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "/login",
+        "destination": "/pages/admin/login.html"
+      },
+      {
+        "source": "/dashboard",
+        "destination": "/pages/admin/dashboard.html"
+      },
+      {
+        "source": "/dashboard/intro",
+        "destination": "/pages/admin/dashboard-intro.html"
+      },
+      {
+        "source": "/dashboard/projects",
+        "destination": "/pages/admin/dashboard-projects.html"
+      },
+      {
+        "source": "/dashboard/stack",
+        "destination": "/pages/admin/dashboard-stack.html"
+      },
+      {
+        "source": "/dashboard/education",
+        "destination": "/pages/admin/dashboard-education.html"
+      }
+    ],
+    "ignore": [
+      "storage/firebase.json",
+      "storage/firestore.rules",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import { getPortfolioContent, isFirebaseConfigured } from "./firebase.js";
+import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
 
 export function about() {
     startTypingIntro();

@@ -1,4 +1,4 @@
-import { getPortfolioContent, isFirebaseConfigured } from "./firebase.js";
+import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
 
 export async function projects() {
     const grid = document.querySelector(".grid");
@@ -25,7 +25,7 @@ async function getProjectData() {
         }
     }
 
-    const res = await fetch('../data/projects.json', { cache: 'no-store' });
+    const res = await fetch('data/projects.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('Failed to fetch projects data');
     return res.json();
 }
