@@ -1,12 +1,6 @@
-# SnugCode Portfolio Style Guide
+# Style Guide
 
 This document records the visual and interaction rules followed while building the SnugCode developer portfolio.
-
-## Design Direction
-
-The portfolio should feel minimal, technical, and focused. The interface uses strong contrast, restrained surfaces, and small interaction details instead of heavy decoration. Content should be easy to scan, with each section treated as its own full-screen moment on the public portfolio.
-
-The admin dashboard follows the same visual language, but it is more functional: compact panels, clear controls, and direct editing workflows.
 
 ## Typography
 
@@ -65,9 +59,7 @@ Public portfolio sections use full-screen rhythm:
 
 Content width:
 
-- Main dashboards use `width: min(1180px, calc(100% - 3rem))`.
 - Public content generally stays centered within a constrained max width.
-- Editor pages in the dashboard use full available dashboard width.
 
 Guidelines:
 
@@ -84,11 +76,10 @@ Guidelines:
 - Primary background: `var(--primary)`
 - Hover background: `var(--accent)`
 - Font weight: `600` or `700`
-- Minimum interactive height in dashboard controls: `42px`
 
 ### Cards and Panels
 
-- Border radius: `8px` for dashboard panels and most content cards.
+- Border radius: `8px` for most content cards.
 - Use `var(--card)` for panel backgrounds.
 - Use soft shadows from `--shadow` and `--shadow-strong`.
 - Borders should use `--border` or `--border-strong`.
@@ -103,7 +94,6 @@ Guidelines:
 
 - Site logo sits at the top left.
 - Public pages link back to `index.html#intro`.
-- Admin pages link back to the dashboard.
 
 ## Public Page Patterns
 
@@ -125,7 +115,7 @@ Guidelines:
 - Stack items are grouped by category.
 - Icons are centered and consistent in size.
 - Labels stay short.
-- Uploaded dashboard icons may be data URLs; static icons live in `assets/icons`.
+- Static icons live in `assets/icons`.
 
 ### Education
 
@@ -138,29 +128,6 @@ Guidelines:
 - Blog pages live under `pages/`.
 - Thought pages live under `pages/thoughts/`.
 - Writing pages should keep a quiet article layout with a clear back link.
-
-## Dashboard Patterns
-
-Dashboard pages live under `pages/admin/`.
-
-Header rules:
-
-- Header title is always `Dashboard`.
-- Auth/status box sits on the right side of the same header row.
-- Do not use `Direct URL only` or extra header kicker copy.
-
-Editor page rules:
-
-- Editor content spans the full dashboard width.
-- Forms use clear labels, inputs, and grouped action buttons.
-- Add, update, remove, reset, and publish actions should be obvious.
-- Publish buttons stay disabled until authentication allows publishing.
-
-Data editing:
-
-- Intro, projects, stack, and education use local drafts first.
-- Firebase publishing writes to the shared portfolio content document.
-- Uploaded icons/logos are stored as data URLs for dashboard-managed entries.
 
 ## Motion
 
@@ -181,11 +148,9 @@ Guidelines:
 
 ## Responsive Rules
 
-- Dashboard grids collapse to one column below `860px`.
 - Education carousel becomes a vertical stack below `760px`.
 - Footer columns stack below `700px`.
 - Text and controls should never overflow their container.
-- Buttons should stretch on narrow dashboard layouts.
 
 ## File Organization
 
@@ -196,22 +161,14 @@ index.html
 pages/
   blog.html
   thoughts/
-  admin/
 assets/
 css/
 data/
 js/
-storage/
 ```
 
 Rules:
 
 - Only `index.html` stays in the root.
-- Non-admin pages live in `pages/`.
-- Dashboard/admin HTML lives in `pages/admin/`.
-- Firebase config, rules, and helpers live in `storage/`.
+- Supporting pages live in `pages/`.
 - Static JSON content lives in `data/`.
-
-## Content Voice
-
-The site should sound straightforward and personal. Copy should avoid sounding like a marketing landing page. Prefer plain descriptions of what was built, why it matters, and what state it is in.
