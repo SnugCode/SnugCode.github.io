@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="dashboard-document" data-dashboard-auth="signed-out">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SnugCode">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Edit SnugCode education history">
+
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconBlack32.png">
+
+    <title>Edit Education | SnugCode Dashboard</title>
+</head>
+<body>
+    <a class="site-logo" href="dashboard.html" aria-label="Dashboard home">
+        <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main class="dashboard-page">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-kicker">Edit Portfolio</p>
+                <h1>Education</h1>
+            </div>
+            <p class="dashboard-url">Direct URL only</p>
+        </header>
+
+        <section id="dashboard-auth" class="dashboard-auth dashboard-auth-bar" aria-label="Dashboard session">
+            <p id="dashboard-status">Checking dashboard access.</p>
+            <button id="dashboard-logout" type="button">Sign Out</button>
+        </section>
+
+        <section id="dashboard-unauthorized" class="dashboard-panel dashboard-unauthorized" aria-label="Unauthorized access">
+            <p class="dashboard-kicker">Unauthorized Access</p>
+            <h2>Unauthorized access</h2>
+            <p>This dashboard is private. Sign in from the login page to continue.</p>
+            <a class="dashboard-auth-link" href="login.html">Go to Login</a>
+        </section>
+
+        <section class="dashboard-grid dashboard-protected" aria-label="Education editor">
+            <article class="dashboard-panel dashboard-panel-wide">
+                <div class="dashboard-panel-heading">
+                    <h2>Education</h2>
+                    <a href="index.html#education">Preview</a>
+                </div>
+                <form id="education-form" class="dashboard-form dashboard-education-form">
+                    <input id="education-edit-index" type="hidden">
+                    <label>
+                        Institution
+                        <input id="education-org" type="text" maxlength="90" placeholder="Institution name">
+                    </label>
+                    <label>
+                        Years
+                        <input id="education-years" type="text" maxlength="40" placeholder="2024 - 2026">
+                    </label>
+                    <label>
+                        Logo
+                        <input id="education-logo" type="file" accept="image/*">
+                    </label>
+                    <label>
+                        Description
+                        <textarea id="education-context" rows="3" maxlength="220" placeholder="Short education note"></textarea>
+                    </label>
+                    <button id="education-submit" type="submit">Add Education</button>
+                    <button id="education-cancel-edit" type="button" hidden>Cancel Edit</button>
+                </form>
+                <div class="dashboard-panel-actions">
+                    <button id="education-reset" type="button">Reset Education</button>
+                    <button id="education-publish" type="button" disabled>Publish to Firebase</button>
+                </div>
+                <div id="dashboard-education" class="dashboard-list"></div>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

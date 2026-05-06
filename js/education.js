@@ -1,5 +1,55 @@
-export function education() {
-    const tiles = Array.from(document.querySelectorAll(".education-tile"));
+import { getPortfolioContent, isFirebaseConfigured } from "./firebase.js";
+
+export async function education() {
+    const carousel = document.querySelector(".education-carousel");
+    if (!carousel) return;
+
+    try {
+        const educationData = await getEducationData();
+        carousel.innerHTML = educationData.map((item, index) => `
+            <article class="education-tile${index === 0 ? " is-active" : ""}">
+                <img src="${esc(getLogoSource(item.logo))}" alt="${esc(item.alt || `${item.org} logo`)}">
+                <div class="education-copy">
+                    <span class="education-org">${esc(item.org)}</span>
+                    <span class="education-years">${esc(item.years)}</span>
+                    <span class="education-context">${esc(item.context)}</span>
+                </div>
+            </article>
+        `).join("");
+    } catch (error) {
+        console.error("Error loading education data:", error);
+        carousel.innerHTML = '<p class="error">Failed to load education history.</p>';
+        return;
+    }
+
+    initEducationCarousel(carousel);
+}
+
+async function getEducationData() {
+    if (isFirebaseConfigured) {
+        try {
+            const content = await getPortfolioContent();
+            const educationData = normalizeEducation(content?.education);
+            if (educationData.length) return educationData;
+        } catch (error) {
+            console.error("Error loading Firebase education:", error);
+        }
+    }
+
+    try {
+        const localEducation = normalizeEducation(JSON.parse(localStorage.getItem("snugcodeEducation") || "[]"));
+        if (localEducation.length) return localEducation;
+    } catch {
+        // Ignore malformed local drafts and fall back to static data.
+    }
+
+    const response = await fetch("../data/education.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Failed to load education.json");
+    return normalizeEducation(await response.json());
+}
+
+function initEducationCarousel(carousel) {
+    const tiles = Array.from(carousel.querySelectorAll(".education-tile"));
     if (tiles.length === 0) return;
 
     let activeIndex = tiles.findIndex((tile) => tile.classList.contains("is-active"));
@@ -79,6 +129,8 @@ export function education() {
     };
 
     const queueNextTile = () => {
+        if (tiles.length < 2) return;
+
         cycleTimer = window.setTimeout(() => {
             tiles[activeIndex].classList.add("is-dropping");
 
@@ -99,4 +151,33 @@ export function education() {
 
     setActiveTile(activeIndex);
     queueNextTile();
+}
+
+function normalizeEducation(items) {
+    if (!Array.isArray(items)) return [];
+
+    return items
+        .map((item) => ({
+            logo: String(item.logo ?? "").trim(),
+            alt: String(item.alt ?? "").trim(),
+            org: String(item.org ?? "").trim(),
+            years: String(item.years ?? "").trim(),
+            context: String(item.context ?? "").trim()
+        }))
+        .filter((item) => item.logo && item.org && item.years && item.context);
+}
+
+function getLogoSource(logo) {
+    const source = String(logo || "");
+    if (source.startsWith("data:") || source.startsWith("http") || source.startsWith("/")) {
+        return source;
+    }
+
+    return source;
+}
+
+function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (match) => (
+        { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[match]
+    ));
 }

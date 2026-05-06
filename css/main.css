@@ -870,6 +870,12 @@ footer {
   padding: 8rem 0 4rem;
 }
 
+.dashboard-page > section {
+  min-height: auto;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}
+
 .dashboard-header {
   display: flex;
   align-items: flex-end;
@@ -997,10 +1003,23 @@ footer {
 
 .dashboard-auth-bar {
   grid-template-columns: 1fr auto;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0;
+  margin-left: auto;
+  padding: 0.65rem;
+  box-shadow: none;
+}
+
+.dashboard-header .dashboard-auth-bar {
+  min-height: auto;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
 }
 
 .dashboard-auth-bar p {
   grid-column: auto;
+  max-width: 42ch;
 }
 
 .login-page {
@@ -1084,7 +1103,7 @@ footer {
 
 .dashboard-edit-links {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 0.75rem;
 }
 
@@ -1236,19 +1255,32 @@ footer {
   margin-bottom: 1.25rem;
 }
 
+.dashboard-education-form {
+  grid-template-columns: minmax(220px, 1fr) 180px minmax(220px, 1fr);
+  gap: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
 .dashboard-stack-form label:nth-of-type(3) {
   grid-column: 1 / -1;
 }
 
-.dashboard-stack-form button {
+.dashboard-education-form label:nth-of-type(4) {
+  grid-column: 1 / -1;
+}
+
+.dashboard-stack-form button,
+.dashboard-education-form button {
   width: fit-content;
 }
 
-.dashboard-stack-form #stack-submit {
+.dashboard-stack-form #stack-submit,
+.dashboard-education-form #education-submit {
   grid-column: 1;
 }
 
-.dashboard-stack-form #stack-cancel-edit {
+.dashboard-stack-form #stack-cancel-edit,
+.dashboard-education-form #education-cancel-edit {
   grid-column: 2;
   justify-self: start;
 }
@@ -1268,24 +1300,39 @@ footer {
   background: var(--card);
 }
 
-#dashboard-stack {
+.dashboard-education-logo {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  padding: 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+}
+
+#dashboard-stack,
+#dashboard-education {
   gap: 1rem;
   margin-top: 0.5rem;
 }
 
-#dashboard-stack .dashboard-list-item {
+#dashboard-stack .dashboard-list-item,
+#dashboard-education .dashboard-list-item {
   align-items: center;
   justify-content: flex-start;
   gap: 1.25rem;
   padding: 1.15rem;
 }
 
-#dashboard-stack .dashboard-list-item > div:first-of-type {
+#dashboard-stack .dashboard-list-item > div:first-of-type,
+#dashboard-education .dashboard-list-item > div:first-of-type {
   flex: 1;
   min-width: 0;
 }
 
-#dashboard-stack .dashboard-tags {
+#dashboard-stack .dashboard-tags,
+#dashboard-education .dashboard-tags {
   margin-left: auto;
 }
 
@@ -1381,18 +1428,22 @@ footer {
   }
 
   .dashboard-stack-form #stack-submit,
-  .dashboard-stack-form #stack-cancel-edit {
+  .dashboard-stack-form #stack-cancel-edit,
+  .dashboard-education-form #education-submit,
+  .dashboard-education-form #education-cancel-edit {
     grid-column: auto;
     justify-self: stretch;
     width: 100%;
   }
 
-  #dashboard-stack .dashboard-list-item {
+  #dashboard-stack .dashboard-list-item,
+  #dashboard-education .dashboard-list-item {
     align-items: flex-start;
     flex-direction: column;
   }
 
-  #dashboard-stack .dashboard-tags {
+  #dashboard-stack .dashboard-tags,
+  #dashboard-education .dashboard-tags {
     justify-content: flex-start;
     margin-left: 0;
     width: 100%;

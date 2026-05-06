@@ -13,10 +13,13 @@ const logoSources = {
 const introStorageKey = "snugcodeIntroSequence";
 const projectsStorageKey = "snugcodeProjects";
 const stackStorageKey = "snugcodeStack";
+const educationStorageKey = "snugcodeEducation";
 let defaultIntroSequence = [];
 let defaultProjects = [];
 let defaultStack = {};
 let uploadedStackIcon = "";
+let defaultEducation = [];
+let uploadedEducationLogo = "";
 
 const stackSections = {
     frontend: "Frontend",
@@ -92,6 +95,19 @@ function saveStackDraft(stack) {
     updateStackStats();
 }
 
+function getEducationDraft() {
+    try {
+        return normalizeEducation(JSON.parse(localStorage.getItem(educationStorageKey) || "[]"));
+    } catch {
+        return [];
+    }
+}
+
+function saveEducationDraft(educationItems) {
+    localStorage.setItem(educationStorageKey, JSON.stringify(normalizeEducation(educationItems)));
+    renderEducation();
+}
+
 function renderIntroSequence() {
     const list = document.querySelector("#intro-sequence-list");
     const sequence = getIntroSequence();
@@ -138,6 +154,15 @@ async function loadDefaultStack() {
 
     if (!Object.values(getStackDraft()).some((items) => items.length)) {
         saveStackDraft(defaultStack);
+    }
+}
+
+async function loadDefaultEducation() {
+    const response = await fetch("data/education.json", { cache: "no-store" });
+    defaultEducation = normalizeEducation(await response.json());
+
+    if (!getEducationDraft().length) {
+        saveEducationDraft(defaultEducation);
     }
 }
 
@@ -265,6 +290,7 @@ function initAuth() {
     const publishButton = document.querySelector("#intro-publish");
     const projectsPublishButton = document.querySelector("#projects-publish");
     const stackPublishButton = document.querySelector("#stack-publish");
+    const educationPublishButton = document.querySelector("#education-publish");
 
     if (!isFirebaseConfigured) {
         authPanel.classList.add("dashboard-auth-warning");
@@ -273,6 +299,7 @@ function initAuth() {
         if (publishButton) publishButton.disabled = true;
         if (projectsPublishButton) projectsPublishButton.disabled = true;
         if (stackPublishButton) stackPublishButton.disabled = true;
+        if (educationPublishButton) educationPublishButton.disabled = true;
         return;
     }
 
@@ -282,6 +309,7 @@ function initAuth() {
         if (publishButton) publishButton.disabled = !isSignedIn;
         if (projectsPublishButton) projectsPublishButton.disabled = !isSignedIn;
         if (stackPublishButton) stackPublishButton.disabled = !isSignedIn;
+        if (educationPublishButton) educationPublishButton.disabled = !isSignedIn;
         setStatus(isSignedIn ? `Signed in as ${user.email}.` : "Unauthorized access.");
     }).catch((error) => {
         document.documentElement.dataset.dashboardAuth = "signed-out";
@@ -517,6 +545,226 @@ async function loadPublishedStack() {
     }
 }
 
+function normalizeEducation(items) {
+    if (!Array.isArray(items)) return [];
+
+    return items
+        .map((item) => ({
+            logo: String(item.logo ?? "").trim(),
+            alt: String(item.alt ?? "").trim(),
+            org: String(item.org ?? "").trim(),
+            years: String(item.years ?? "").trim(),
+            context: String(item.context ?? "").trim()
+        }))
+        .filter((item) => item.logo && item.org && item.years && item.context);
+}
+
+function getEducationLogoSource(logo) {
+    const source = String(logo || "");
+    if (source.startsWith("data:") || source.startsWith("http") || source.startsWith("/")) {
+        return source;
+    }
+
+    return source;
+}
+
+function renderEducation() {
+    const list = document.querySelector("#dashboard-education");
+    if (!list) return;
+
+    const educationItems = getEducationDraft();
+
+    if (!educationItems.length) {
+        list.innerHTML = '<p class="dashboard-empty-copy">No education items yet.</p>';
+        return;
+    }
+
+    list.innerHTML = educationItems.map((item, index) => `
+        <div class="dashboard-list-item dashboard-education-item">
+            <img class="dashboard-education-logo" src="${esc(getEducationLogoSource(item.logo))}" alt="">
+            <div>
+                <h3>${esc(item.org)}</h3>
+                <p>${esc(item.years)}</p>
+                <p>${esc(item.context)}</p>
+            </div>
+            <div class="dashboard-tags">
+                <button class="dashboard-small-button" type="button" data-education-edit="${index}">Edit</button>
+                <button class="dashboard-small-button" type="button" data-education-remove="${index}">Remove</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function readImageFile(file) {
+    return new Promise((resolve, reject) => {
+        if (!file) {
+            resolve("");
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+            reject(new Error("Please upload an image file."));
+            return;
+        }
+
+        if (file.size > 350 * 1024) {
+            reject(new Error("Please keep logo images under 350 KB."));
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.addEventListener("load", () => resolve(String(reader.result || "")));
+        reader.addEventListener("error", () => reject(new Error("Could not read the logo file.")));
+        reader.readAsDataURL(file);
+    });
+}
+
+function resetEducationForm() {
+    const form = document.querySelector("#education-form");
+    if (!form) return;
+
+    form.reset();
+    uploadedEducationLogo = "";
+    document.querySelector("#education-edit-index").value = "";
+    document.querySelector("#education-submit").textContent = "Add Education";
+    document.querySelector("#education-cancel-edit").hidden = true;
+}
+
+function initEducationEditor() {
+    const form = document.querySelector("#education-form");
+    if (!form) return;
+
+    const logoInput = document.querySelector("#education-logo");
+    const resetButton = document.querySelector("#education-reset");
+    const publishButton = document.querySelector("#education-publish");
+    const cancelEditButton = document.querySelector("#education-cancel-edit");
+    const list = document.querySelector("#dashboard-education");
+
+    renderEducation();
+
+    logoInput.addEventListener("change", async () => {
+        try {
+            uploadedEducationLogo = await readImageFile(logoInput.files[0]);
+            setStatus(uploadedEducationLogo ? "Education logo ready." : "No logo selected.");
+        } catch (error) {
+            uploadedEducationLogo = "";
+            logoInput.value = "";
+            setStatus(error.message);
+        }
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const org = document.querySelector("#education-org").value.trim();
+        const years = document.querySelector("#education-years").value.trim();
+        const context = document.querySelector("#education-context").value.trim();
+        const editIndex = document.querySelector("#education-edit-index").value;
+        const educationItems = getEducationDraft();
+
+        if (!org || !years || !context) return;
+
+        if (editIndex) {
+            const index = Number(editIndex);
+            const currentItem = educationItems[index];
+            if (!currentItem) return;
+
+            educationItems[index] = {
+                logo: uploadedEducationLogo || currentItem.logo,
+                alt: `${org} logo`,
+                org,
+                years,
+                context
+            };
+            saveEducationDraft(educationItems);
+            resetEducationForm();
+            setStatus("Education item updated.");
+            return;
+        }
+
+        if (!uploadedEducationLogo) {
+            setStatus("Upload a logo before adding the education item.");
+            return;
+        }
+
+        educationItems.push({
+            logo: uploadedEducationLogo,
+            alt: `${org} logo`,
+            org,
+            years,
+            context
+        });
+        saveEducationDraft(educationItems);
+        resetEducationForm();
+        setStatus("Education item added to local draft.");
+    });
+
+    resetButton.addEventListener("click", () => {
+        saveEducationDraft(defaultEducation);
+        resetEducationForm();
+        setStatus("Education draft reset.");
+    });
+
+    publishButton.addEventListener("click", async () => {
+        try {
+            await savePortfolioContent({ education: getEducationDraft() });
+            setStatus("Education published to Firebase.");
+        } catch (error) {
+            setStatus(error.message);
+        }
+    });
+
+    cancelEditButton.addEventListener("click", () => {
+        resetEducationForm();
+        setStatus("Education edit cancelled.");
+    });
+
+    list.addEventListener("click", (event) => {
+        const editButton = event.target.closest("[data-education-edit]");
+        const removeButton = event.target.closest("[data-education-remove]");
+        const educationItems = getEducationDraft();
+
+        if (editButton) {
+            const index = Number(editButton.dataset.educationEdit);
+            const item = educationItems[index];
+            if (!item) return;
+
+            document.querySelector("#education-org").value = item.org;
+            document.querySelector("#education-years").value = item.years;
+            document.querySelector("#education-context").value = item.context;
+            document.querySelector("#education-edit-index").value = String(index);
+            document.querySelector("#education-submit").textContent = "Update Education";
+            cancelEditButton.hidden = false;
+            uploadedEducationLogo = "";
+            logoInput.value = "";
+            setStatus("Editing education item. Upload a new logo only if you want to replace it.");
+            return;
+        }
+
+        if (removeButton) {
+            const index = Number(removeButton.dataset.educationRemove);
+            educationItems.splice(index, 1);
+            saveEducationDraft(educationItems);
+            resetEducationForm();
+            setStatus("Education item removed from local draft.");
+        }
+    });
+}
+
+async function loadPublishedEducation() {
+    if (!isFirebaseConfigured) return;
+
+    try {
+        const content = await getPortfolioContent();
+        if (Array.isArray(content?.education)) {
+            saveEducationDraft(content.education);
+            setStatus("Published Firebase education loaded.");
+        }
+    } catch (error) {
+        setStatus(error.message);
+    }
+}
+
 function renderProjects(projects) {
     const projectList = document.querySelector("#dashboard-projects");
     const writingList = document.querySelector("#dashboard-writing");
@@ -687,6 +935,15 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch((error) => {
             console.error("Error loading stack:", error);
+            setStatus(error.message);
+        });
+    loadDefaultEducation()
+        .then(() => {
+            initEducationEditor();
+            loadPublishedEducation();
+        })
+        .catch((error) => {
+            console.error("Error loading education:", error);
             setStatus(error.message);
         });
 });
