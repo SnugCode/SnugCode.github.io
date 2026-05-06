@@ -24,16 +24,13 @@
     <main class="dashboard-page">
         <header class="dashboard-header">
             <div>
-                <p class="dashboard-kicker">Edit Portfolio</p>
-                <h1>Intro Text</h1>
+                <h1>Dashboard</h1>
             </div>
-            <p class="dashboard-url">Direct URL only</p>
+            <section id="dashboard-auth" class="dashboard-auth dashboard-auth-bar" aria-label="Dashboard session">
+                <p id="dashboard-status">Checking dashboard access.</p>
+                <button id="dashboard-logout" type="button">Sign Out</button>
+            </section>
         </header>
-
-        <section id="dashboard-auth" class="dashboard-auth dashboard-auth-bar" aria-label="Dashboard session">
-            <p id="dashboard-status">Checking dashboard access.</p>
-            <button id="dashboard-logout" type="button">Sign Out</button>
-        </section>
 
         <section id="dashboard-unauthorized" class="dashboard-panel dashboard-unauthorized" aria-label="Unauthorized access">
             <p class="dashboard-kicker">Unauthorized Access</p>

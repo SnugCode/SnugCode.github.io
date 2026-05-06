@@ -1069,12 +1069,20 @@ footer {
   gap: 1rem;
 }
 
+.dashboard-grid[aria-label$="editor"] {
+  grid-template-columns: 1fr;
+}
+
 .dashboard-panel {
   padding: 1.25rem;
 }
 
 .dashboard-panel-wide {
   grid-row: span 2;
+}
+
+.dashboard-grid[aria-label$="editor"] .dashboard-panel-wide {
+  grid-row: auto;
 }
 
 .dashboard-panel-heading {
