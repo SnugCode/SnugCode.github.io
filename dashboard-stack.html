@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="dashboard-document" data-dashboard-auth="signed-out">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SnugCode">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Edit SnugCode stack">
+
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Logo/FavIconBlack32.png">
+
+    <title>Edit Stack | SnugCode Dashboard</title>
+</head>
+<body>
+    <a class="site-logo" href="dashboard.html" aria-label="Dashboard home">
+        <img class="theme-logo" src="assets/Logo/LogoWhite.png" alt="SnugCode">
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true">
+        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+    </button>
+
+    <main class="dashboard-page">
+        <header class="dashboard-header">
+            <div>
+                <p class="dashboard-kicker">Edit Portfolio</p>
+                <h1>Stack</h1>
+            </div>
+            <p class="dashboard-url">Direct URL only</p>
+        </header>
+
+        <section id="dashboard-auth" class="dashboard-auth dashboard-auth-bar" aria-label="Dashboard session">
+            <p id="dashboard-status">Checking dashboard access.</p>
+            <button id="dashboard-logout" type="button">Sign Out</button>
+        </section>
+
+        <section id="dashboard-unauthorized" class="dashboard-panel dashboard-unauthorized" aria-label="Unauthorized access">
+            <p class="dashboard-kicker">Unauthorized Access</p>
+            <h2>Unauthorized access</h2>
+            <p>This dashboard is private. Sign in from the login page to continue.</p>
+            <a class="dashboard-auth-link" href="login.html">Go to Login</a>
+        </section>
+
+        <section class="dashboard-grid dashboard-protected" aria-label="Stack editor">
+            <article class="dashboard-panel dashboard-panel-wide">
+                <div class="dashboard-panel-heading">
+                    <h2>Stack</h2>
+                    <a href="index.html#stack">Preview</a>
+                </div>
+                <form id="stack-form" class="dashboard-form dashboard-stack-form">
+                    <input id="stack-edit-index" type="hidden">
+                    <label>
+                        Title
+                        <input id="stack-title" type="text" maxlength="60" placeholder="Technology name">
+                    </label>
+                    <label>
+                        Section
+                        <select id="stack-section">
+                            <option value="frontend">Frontend</option>
+                            <option value="backend">Backend</option>
+                            <option value="dataCloud">Data &amp; Cloud</option>
+                            <option value="systemsTools">Systems &amp; Tools</option>
+                        </select>
+                    </label>
+                    <label>
+                        SVG Icon
+                        <input id="stack-icon" type="file" accept=".svg,image/svg+xml">
+                    </label>
+                    <button id="stack-submit" type="submit">Add Stack Item</button>
+                    <button id="stack-cancel-edit" type="button" hidden>Cancel Edit</button>
+                </form>
+                <div class="dashboard-panel-actions">
+                    <button id="stack-reset" type="button">Reset Stack</button>
+                    <button id="stack-publish" type="button" disabled>Publish to Firebase</button>
+                </div>
+                <div id="dashboard-stack" class="dashboard-list"></div>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

@@ -12,8 +12,18 @@ const logoSources = {
 };
 const introStorageKey = "snugcodeIntroSequence";
 const projectsStorageKey = "snugcodeProjects";
+const stackStorageKey = "snugcodeStack";
 let defaultIntroSequence = [];
 let defaultProjects = [];
+let defaultStack = {};
+let uploadedStackIcon = "";
+
+const stackSections = {
+    frontend: "Frontend",
+    backend: "Backend",
+    dataCloud: "Data & Cloud",
+    systemsTools: "Systems & Tools"
+};
 
 const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (match) => (
     { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[match]
@@ -67,6 +77,21 @@ function saveProjectsDraft(projects) {
     updateProjectStats(projects);
 }
 
+function getStackDraft() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(stackStorageKey) || "{}");
+        return normalizeStack(saved);
+    } catch {
+        return normalizeStack({});
+    }
+}
+
+function saveStackDraft(stack) {
+    localStorage.setItem(stackStorageKey, JSON.stringify(normalizeStack(stack)));
+    renderStack();
+    updateStackStats();
+}
+
 function renderIntroSequence() {
     const list = document.querySelector("#intro-sequence-list");
     const sequence = getIntroSequence();
@@ -104,6 +129,15 @@ async function loadDefaultProjects() {
 
     if (!getProjectsDraft().length) {
         saveProjectsDraft(defaultProjects);
+    }
+}
+
+async function loadDefaultStack() {
+    const response = await fetch("data/stack.json", { cache: "no-store" });
+    defaultStack = normalizeStack(await response.json());
+
+    if (!Object.values(getStackDraft()).some((items) => items.length)) {
+        saveStackDraft(defaultStack);
     }
 }
 
@@ -230,6 +264,7 @@ function initAuth() {
     const logoutButton = document.querySelector("#dashboard-logout");
     const publishButton = document.querySelector("#intro-publish");
     const projectsPublishButton = document.querySelector("#projects-publish");
+    const stackPublishButton = document.querySelector("#stack-publish");
 
     if (!isFirebaseConfigured) {
         authPanel.classList.add("dashboard-auth-warning");
@@ -237,6 +272,7 @@ function initAuth() {
         setStatus("Unauthorized access.");
         if (publishButton) publishButton.disabled = true;
         if (projectsPublishButton) projectsPublishButton.disabled = true;
+        if (stackPublishButton) stackPublishButton.disabled = true;
         return;
     }
 
@@ -245,6 +281,7 @@ function initAuth() {
         document.documentElement.dataset.dashboardAuth = isSignedIn ? "signed-in" : "signed-out";
         if (publishButton) publishButton.disabled = !isSignedIn;
         if (projectsPublishButton) projectsPublishButton.disabled = !isSignedIn;
+        if (stackPublishButton) stackPublishButton.disabled = !isSignedIn;
         setStatus(isSignedIn ? `Signed in as ${user.email}.` : "Unauthorized access.");
     }).catch((error) => {
         document.documentElement.dataset.dashboardAuth = "signed-out";
@@ -255,6 +292,229 @@ function initAuth() {
         await logout();
         window.location.href = "login.html";
     });
+}
+
+function normalizeStack(stack) {
+    return Object.keys(stackSections).reduce((normalized, section) => {
+        const items = Array.isArray(stack?.[section]) ? stack[section] : [];
+        normalized[section] = items
+            .map((item) => ({
+                label: String(item.label ?? "").trim(),
+                icon: String(item.icon ?? "").trim()
+            }))
+            .filter((item) => item.label && item.icon);
+        return normalized;
+    }, {});
+}
+
+function getStackIconSource(icon) {
+    const source = String(icon || "");
+    if (source.startsWith("data:") || source.startsWith("http") || source.startsWith("/")) {
+        return source;
+    }
+
+    return `assets/icons/${source}`;
+}
+
+function renderStack() {
+    const list = document.querySelector("#dashboard-stack");
+    if (!list) return;
+
+    const stack = getStackDraft();
+    const rows = Object.entries(stack).flatMap(([section, items]) => (
+        items.map((item, index) => ({ ...item, section, index }))
+    ));
+
+    if (!rows.length) {
+        list.innerHTML = '<p class="dashboard-empty-copy">No stack items yet.</p>';
+        return;
+    }
+
+    list.innerHTML = rows.map((item) => `
+        <div class="dashboard-list-item">
+            <img class="dashboard-stack-icon" src="${esc(getStackIconSource(item.icon))}" alt="">
+            <div>
+                <h3>${esc(item.label)}</h3>
+                <p>${esc(stackSections[item.section])}</p>
+            </div>
+            <div class="dashboard-tags">
+                <button class="dashboard-small-button" type="button" data-stack-edit-section="${esc(item.section)}" data-stack-edit-index="${item.index}">Edit</button>
+                <button class="dashboard-small-button" type="button" data-stack-remove-section="${esc(item.section)}" data-stack-remove-index="${item.index}">Remove</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function updateStackStats() {
+    const stackCountElement = document.querySelector("#stack-count");
+    if (!stackCountElement) return;
+
+    const stack = getStackDraft();
+    stackCountElement.textContent = Object.values(stack).reduce((total, group) => total + group.length, 0);
+}
+
+function readSvgFile(file) {
+    return new Promise((resolve, reject) => {
+        if (!file) {
+            resolve("");
+            return;
+        }
+
+        if (file.type !== "image/svg+xml" && !file.name.toLowerCase().endsWith(".svg")) {
+            reject(new Error("Please upload an SVG file."));
+            return;
+        }
+
+        if (file.size > 200 * 1024) {
+            reject(new Error("Please keep SVG icons under 200 KB."));
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.addEventListener("load", () => resolve(String(reader.result || "")));
+        reader.addEventListener("error", () => reject(new Error("Could not read the SVG file.")));
+        reader.readAsDataURL(file);
+    });
+}
+
+function resetStackForm() {
+    const form = document.querySelector("#stack-form");
+    if (!form) return;
+
+    form.reset();
+    uploadedStackIcon = "";
+    document.querySelector("#stack-edit-index").value = "";
+    document.querySelector("#stack-submit").textContent = "Add Stack Item";
+    document.querySelector("#stack-cancel-edit").hidden = true;
+}
+
+function initStackEditor() {
+    const form = document.querySelector("#stack-form");
+    if (!form) return;
+
+    const iconInput = document.querySelector("#stack-icon");
+    const resetButton = document.querySelector("#stack-reset");
+    const publishButton = document.querySelector("#stack-publish");
+    const cancelEditButton = document.querySelector("#stack-cancel-edit");
+    const list = document.querySelector("#dashboard-stack");
+
+    renderStack();
+
+    iconInput.addEventListener("change", async () => {
+        try {
+            uploadedStackIcon = await readSvgFile(iconInput.files[0]);
+            setStatus(uploadedStackIcon ? "SVG icon ready." : "No SVG selected.");
+        } catch (error) {
+            uploadedStackIcon = "";
+            iconInput.value = "";
+            setStatus(error.message);
+        }
+    });
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const label = document.querySelector("#stack-title").value.trim();
+        const section = document.querySelector("#stack-section").value;
+        const editIndex = document.querySelector("#stack-edit-index").value;
+        const stack = getStackDraft();
+
+        if (!label || !section) return;
+
+        if (editIndex) {
+            const [oldSection, oldIndexValue] = editIndex.split(":");
+            const oldIndex = Number(oldIndexValue);
+            const currentItem = stack[oldSection]?.[oldIndex];
+            if (!currentItem) return;
+
+            const nextItem = {
+                label,
+                icon: uploadedStackIcon || currentItem.icon
+            };
+            stack[oldSection].splice(oldIndex, 1);
+            stack[section].push(nextItem);
+            saveStackDraft(stack);
+            resetStackForm();
+            setStatus("Stack item updated.");
+            return;
+        }
+
+        if (!uploadedStackIcon) {
+            setStatus("Upload an SVG icon before adding the stack item.");
+            return;
+        }
+
+        stack[section].push({ label, icon: uploadedStackIcon });
+        saveStackDraft(stack);
+        resetStackForm();
+        setStatus("Stack item added to local draft.");
+    });
+
+    resetButton.addEventListener("click", () => {
+        saveStackDraft(defaultStack);
+        resetStackForm();
+        setStatus("Stack draft reset.");
+    });
+
+    publishButton.addEventListener("click", async () => {
+        try {
+            await savePortfolioContent({ stack: getStackDraft() });
+            setStatus("Stack published to Firebase.");
+        } catch (error) {
+            setStatus(error.message);
+        }
+    });
+
+    cancelEditButton.addEventListener("click", () => {
+        resetStackForm();
+        setStatus("Stack edit cancelled.");
+    });
+
+    list.addEventListener("click", (event) => {
+        const editButton = event.target.closest("[data-stack-edit-section]");
+        const removeButton = event.target.closest("[data-stack-remove-section]");
+        const stack = getStackDraft();
+
+        if (editButton) {
+            const section = editButton.dataset.stackEditSection;
+            const index = Number(editButton.dataset.stackEditIndex);
+            const item = stack[section]?.[index];
+            if (!item) return;
+
+            document.querySelector("#stack-title").value = item.label;
+            document.querySelector("#stack-section").value = section;
+            document.querySelector("#stack-edit-index").value = `${section}:${index}`;
+            document.querySelector("#stack-submit").textContent = "Update Stack Item";
+            cancelEditButton.hidden = false;
+            uploadedStackIcon = "";
+            iconInput.value = "";
+            setStatus("Editing stack item. Upload a new SVG only if you want to replace the icon.");
+            return;
+        }
+
+        if (removeButton) {
+            const section = removeButton.dataset.stackRemoveSection;
+            const index = Number(removeButton.dataset.stackRemoveIndex);
+            stack[section]?.splice(index, 1);
+            saveStackDraft(stack);
+            resetStackForm();
+            setStatus("Stack item removed from local draft.");
+        }
+    });
+}
+
+async function loadPublishedStack() {
+    if (!isFirebaseConfigured) return;
+
+    try {
+        const content = await getPortfolioContent();
+        if (content?.stack && typeof content.stack === "object") {
+            saveStackDraft(content.stack);
+            setStatus("Published Firebase stack loaded.");
+        }
+    } catch (error) {
+        setStatus(error.message);
+    }
 }
 
 function renderProjects(projects) {
@@ -383,13 +643,9 @@ async function loadPublishedProjects() {
 }
 
 async function initDashboard() {
-    const stackResponse = await fetch("data/stack.json", { cache: "no-store" });
-    const stack = await stackResponse.json();
-    const stackCount = Object.values(stack).reduce((total, group) => total + group.length, 0);
     const projects = getProjectsDraft();
 
-    const stackCountElement = document.querySelector("#stack-count");
-    if (stackCountElement) stackCountElement.textContent = stackCount;
+    updateStackStats();
     updateProjectStats(projects);
     renderProjects(projects);
 }
@@ -422,6 +678,15 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch((error) => {
             console.error("Error loading dashboard:", error);
+            setStatus(error.message);
+        });
+    loadDefaultStack()
+        .then(() => {
+            initStackEditor();
+            loadPublishedStack();
+        })
+        .catch((error) => {
+            console.error("Error loading stack:", error);
             setStatus(error.message);
         });
 });
