@@ -29,10 +29,6 @@
 }
 
 .theme-toggle {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 10;
     display: inline-flex;
     align-items: center;
     justify-content: center;
