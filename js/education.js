@@ -6,7 +6,7 @@ export async function education() {
         const educationData = await getEducationData();
         carousel.innerHTML = educationData.map((item, index) => `
             <article class="education-tile${index === 0 ? " is-active" : ""}">
-                <img src="${esc(getLogoSource(item.logo))}" alt="${esc(item.alt || `${item.org} logo`)}">
+                <img src="${esc(getLogoSource(item.logo))}" alt="${esc(item.alt || `${item.org} logo`)}" loading="lazy" decoding="async">
                 <div class="education-copy">
                     <span class="education-org">${esc(item.org)}</span>
                     <span class="education-years">${esc(item.years)}</span>

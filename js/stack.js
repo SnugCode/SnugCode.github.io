@@ -38,6 +38,8 @@ export function stack() {
         img.classList.add('stack-icon');
         img.src = getIconSource(item.icon, iconBasePath);
         img.alt = item.label || ' ';
+        img.loading = 'lazy';
+        img.decoding = 'async';
 
         const label = document.createElement('p');
         label.classList.add('stack-label');

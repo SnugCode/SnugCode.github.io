@@ -33,7 +33,7 @@ function cardHTML(p) {
         : '';
     const media = p.image
         ? `<figure class="project-media">
-                <img src="${esc(p.image)}" alt="${esc(p.title)} cover">
+                <img src="${esc(p.image)}" alt="${esc(p.title)} cover" loading="lazy" decoding="async">
             </figure>`
         : `<div class="project-media project-media-placeholder" aria-hidden="true">
                 <span>${esc(p.title).slice(0, 1)}</span>
