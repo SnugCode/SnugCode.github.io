@@ -1,5 +1,3 @@
-import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
-
 export function stack() { 
     const STACK_DATA_URL = 'data/stack.json';
     const ICON_BASE_PATH = 'assets/icons/';
@@ -27,27 +25,7 @@ export function stack() {
         .catch(error => console.error('Error loading stack data:', error));
 
     async function getStackData() {
-        if (isFirebaseConfigured) {
-            try {
-                const content = await getPortfolioContent();
-                if (content?.stack && typeof content.stack === 'object') {
-                    return content.stack;
-                }
-            } catch (error) {
-                console.error('Error loading Firebase stack data:', error);
-            }
-        }
-
-        try {
-            const savedStack = JSON.parse(localStorage.getItem('snugcodeStack') || '{}');
-            if (savedStack && Object.values(savedStack).some((items) => Array.isArray(items) && items.length)) {
-                return savedStack;
-            }
-        } catch {
-            // Ignore malformed local drafts and fall back to the static stack data.
-        }
-
-        const response = await fetch(STACK_DATA_URL, { cache: 'no-store' });
+        const response = await fetch(STACK_DATA_URL);
         if (!response.ok) throw new Error('Failed to load stack.json');
         return response.json();
     }

@@ -1,5 +1,3 @@
-import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
-
 export async function education() {
     const carousel = document.querySelector(".education-carousel");
     if (!carousel) return;
@@ -26,24 +24,7 @@ export async function education() {
 }
 
 async function getEducationData() {
-    if (isFirebaseConfigured) {
-        try {
-            const content = await getPortfolioContent();
-            const educationData = normalizeEducation(content?.education);
-            if (educationData.length) return educationData;
-        } catch (error) {
-            console.error("Error loading Firebase education:", error);
-        }
-    }
-
-    try {
-        const localEducation = normalizeEducation(JSON.parse(localStorage.getItem("snugcodeEducation") || "[]"));
-        if (localEducation.length) return localEducation;
-    } catch {
-        // Ignore malformed local drafts and fall back to static data.
-    }
-
-    const response = await fetch("data/education.json", { cache: "no-store" });
+    const response = await fetch("data/education.json");
     if (!response.ok) throw new Error("Failed to load education.json");
     return normalizeEducation(await response.json());
 }

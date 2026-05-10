@@ -1,5 +1,3 @@
-import { getPortfolioContent, isFirebaseConfigured } from "../storage/firebase.js";
-
 export function about() {
     startTypingIntro();
 }
@@ -49,56 +47,7 @@ async function startTypingIntro() {
         eraseNextCharacter();
     };
 
-    const savedSequence = await getSavedIntroSequence();
-    if (savedSequence.length) {
-        lineOne.textContent = "";
-        lineTwo.textContent = "";
-        runSavedIntroSequence(savedSequence, typeLine, eraseLine, lineOne, lineTwo);
-        return;
-    }
-
     runOriginalIntro(typeLine, eraseLine, lineOne, lineTwo);
-}
-
-async function getSavedIntroSequence() {
-    if (isFirebaseConfigured) {
-        try {
-            const content = await getPortfolioContent();
-            const sequence = normalizeIntroSequence(content?.introSequence);
-            if (sequence.length) return sequence;
-        } catch (error) {
-            console.error("Error loading Firebase intro sequence:", error);
-        }
-    }
-
-    try {
-        const sequence = JSON.parse(localStorage.getItem("snugcodeIntroSequence") || "[]");
-        return normalizeIntroSequence(sequence);
-    } catch {
-        return [];
-    }
-}
-
-async function runSavedIntroSequence(sequence, typeLine, eraseLine, lineOne, lineTwo) {
-    const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-    const type = (target, text, speed) => new Promise((resolve) => typeLine(target, text, speed, resolve));
-    const erase = (target, speed) => new Promise((resolve) => eraseLine(target, speed, resolve));
-    let previousDelay = 0;
-
-    for (const item of sequence) {
-        await wait(Math.max(0, item.delay - previousDelay));
-
-        if (item.line === 1) {
-            if (lineTwo.textContent) await erase(lineTwo, 70);
-            if (lineOne.textContent) await erase(lineOne, 70);
-            await type(lineOne, item.text, item.speed);
-        } else {
-            if (lineTwo.textContent) await erase(lineTwo, 70);
-            await type(lineTwo, item.text, item.speed);
-        }
-
-        previousDelay = item.delay;
-    }
 }
 
 function runOriginalIntro(typeLine, eraseLine, lineOne, lineTwo) {
@@ -125,17 +74,4 @@ function runOriginalIntro(typeLine, eraseLine, lineOne, lineTwo) {
             });
         }, 2200);
     });
-}
-
-function normalizeIntroSequence(sequence) {
-    if (!Array.isArray(sequence)) return [];
-
-    return sequence
-        .map((item) => ({
-            text: String(item.text ?? "").trim(),
-            line: Number(item.line) === 2 ? 2 : 1,
-            delay: Math.max(0, Number(item.delay) || 0),
-            speed: Math.max(20, Number(item.speed) || 90)
-        }))
-        .filter((item) => item.text);
 }

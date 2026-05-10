@@ -1,20 +1,20 @@
 [
     {
-        "logo": "assets/Logo/Swinburne.png",
+        "logo": "assets/logo/Swinburne.png",
         "alt": "Swinburne logo",
         "org": "Swinburne University of Technology",
         "years": "2024 - 2026",
         "context": "Migrated to Australia to Complete my Bachelors of Computer Science."
     },
     {
-        "logo": "assets/Logo/NCHS.png",
+        "logo": "assets/logo/NCHS.png",
         "alt": "NCHS logo",
         "org": "Nawaloka College of Higher Studies",
         "years": "2023 - 2024",
         "context": "Enrolled in a program to complete the first year of my Bachelors in Sri Lanka and the rest in Australia."
     },
     {
-        "logo": "assets/Logo/AnandaCollegeCrest.png",
+        "logo": "assets/logo/AnandaCollegeCrest.png",
         "alt": "Ananda College crest",
         "org": "Ananda College",
         "years": "2009 - 2022",

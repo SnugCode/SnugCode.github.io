@@ -6,8 +6,8 @@ import { education } from "./education.js";
 const siteTitle = "SnugCode Portfolio";
 const currentYear = new Date().getFullYear();
 const logoSources = {
-    dark: "assets/Logo/LogoWhite.png",
-    light: "assets/Logo/LogoBlack.png"
+    dark: "assets/logo/LogoWhite.png",
+    light: "assets/logo/LogoBlack.png"
 };
 
 function setTheme(theme) {
