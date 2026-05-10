@@ -1,6 +1,7 @@
 export async function projects() {
     const grid = document.querySelector(".grid");
     if (!grid) return;
+    if (grid.children.length) return;
 
     try {
         const projectData = await getProjectData();

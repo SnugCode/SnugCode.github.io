@@ -9,6 +9,8 @@ export function stack() {
         return;
     }
 
+    if (Array.from(stackContainers).every(container => container.children.length)) return;
+
     getStackData()
         .then(data => {
             stackContainers.forEach(container => {

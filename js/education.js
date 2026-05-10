@@ -2,6 +2,11 @@ export async function education() {
     const carousel = document.querySelector(".education-carousel");
     if (!carousel) return;
 
+    if (carousel.querySelector(".education-tile")) {
+        initEducationCarousel(carousel);
+        return;
+    }
+
     try {
         const educationData = await getEducationData();
         carousel.innerHTML = educationData.map((item, index) => `
