@@ -60,30 +60,85 @@ footer {
     opacity: 1;
 }
 
+.footer-brand p.is-typing::after,
+.footer-section h4.is-typing::after,
+.footer-section a.is-typing::after,
+.contact-icons span.is-typing::after,
+.copyright small.is-typing::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 0.18rem;
+    vertical-align: -0.12em;
+    background: currentColor;
+    animation: blink-caret 0.8s step-end infinite;
+}
+
 .contact-icons {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-icons li {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition-delay: var(--contact-icon-delay, 0ms);
+}
+
+.contact-icons li.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.contact-icons li a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    min-height: 38px;
+    padding: 0;
+    color: var(--text);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-icons li a:hover,
+.contact-icons li a:focus-visible {
+    color: var(--accent);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 .contact-icons li a img {
-    width: 26px;
-    height: 26px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
 }
 
-.contact-icons li a img:hover {
+.contact-icons li a span {
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.contact-icons li a:hover img,
+.contact-icons li a:focus-visible img {
     transform: scale(1.1);
-    opacity: 0.9;
+    opacity: 1;
+    filter: drop-shadow(0 3px 6px var(--shadow));
 }
 
 .copyright {
-    text-align: center;
+    text-align: right;
     margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid var(--border-strong);
+    padding-top: 0;
     font-size: 13px;
     opacity: 0.85;
 }
@@ -92,5 +147,13 @@ footer {
     .footer-container {
         flex-direction: column;
         gap: 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-icons li {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

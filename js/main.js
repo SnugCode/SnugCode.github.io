@@ -3,6 +3,7 @@ import { projects } from "./projects.js";
 import { stack } from "./stack.js";
 import { education } from "./education.js";
 import { initTheme } from "./theme.js";
+import { initFooterTyping } from "./footerTyping.js";
 
 const siteTitle = "SnugCode Portfolio";
 const currentYear = new Date().getFullYear();
@@ -14,6 +15,7 @@ function init() {
     projects();
     stack(); 
     education();
+    initFooterTyping();
 }
 
 document.addEventListener("DOMContentLoaded", init);

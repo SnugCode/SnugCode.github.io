@@ -25,6 +25,10 @@ function setTheme(theme) {
         logo.src = selectedTheme === "dark" ? logo.dataset.darkSrc : logo.dataset.lightSrc;
     });
 
+    document.querySelectorAll(".theme-icon").forEach((icon) => {
+        icon.src = selectedTheme === "dark" ? icon.dataset.darkSrc : icon.dataset.lightSrc;
+    });
+
     if (themeToggle) {
         themeToggle.setAttribute("aria-pressed", String(isDark));
         themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
