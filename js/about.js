@@ -12,6 +12,8 @@ async function startTypingIntro() {
     const linkedInAction = document.querySelector('.intro-linkedin-action');
     const blogAction = document.querySelector('.intro-blog-action');
     const scrollCue = document.querySelector('.intro-scroll-cue');
+    const sriLankaMap = document.querySelector('.intro-sri-lanka-map');
+    const australiaMap = document.querySelector('.intro-australia-map');
     if (!lineOne || !lineTwo || !cursor) return;
 
     const typeLine = (target, text, delay, onComplete) => {
@@ -63,7 +65,9 @@ async function startTypingIntro() {
         emailAction,
         linkedInAction,
         blogAction,
-        scrollCue
+        scrollCue,
+        sriLankaMap,
+        australiaMap
     });
 }
 
@@ -77,7 +81,9 @@ async function runIntroSequence({
     emailAction,
     linkedInAction,
     blogAction,
-    scrollCue
+    scrollCue,
+    sriLankaMap,
+    australiaMap
 }) {
     const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
     const type = (target, text, speed) => new Promise((resolve) => typeLine(target, text, speed, resolve));
@@ -101,6 +107,24 @@ async function runIntroSequence({
 
     await wait(1800);
     nameMark?.classList.remove("is-visible");
+    await clearLines();
+
+    await type(lineOne, "I was born in Colombo,", 72);
+    await wait(350);
+    await type(lineTwo, "Sri Lanka.", 80);
+    sriLankaMap?.classList.add("is-visible");
+
+    await wait(2100);
+    sriLankaMap?.classList.remove("is-visible");
+    await clearLines();
+
+    await type(lineOne, "I am currently residing in", 72);
+    await wait(350);
+    await type(lineTwo, "Melbourne, Australia.", 80);
+    australiaMap?.classList.add("is-visible");
+
+    await wait(1800);
+    australiaMap?.classList.remove("is-visible");
     await clearLines();
 
     await type(lineOne, "Welcome to my portfolio.", 80);

@@ -168,6 +168,63 @@ footer {
     animation: wave-hello 1.1s ease-in-out 0.15s 3;
 }
 
+.intro-map {
+    position: absolute;
+    right: clamp(3rem, 13vw, 11rem);
+    top: 50%;
+    z-index: 1;
+    width: clamp(140px, 17vw, 220px);
+    opacity: 0;
+    transform: translate(34px, -50%) scale(0.94);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.intro-map.is-visible {
+    opacity: 1;
+    transform: translate(0, -50%) scale(1);
+}
+
+.intro-map img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 14px 26px var(--shadow));
+}
+
+.intro-australia-map {
+    width: clamp(190px, 24vw, 320px);
+}
+
+.intro-map-pin {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 3px solid #ffffff;
+    border-radius: 50% 50% 50% 0;
+    background: #e53935;
+    box-shadow: 0 8px 18px var(--shadow);
+    transform: translate(-50%, -100%) rotate(-45deg);
+    animation: map-pin-drop 0.55s cubic-bezier(0.2, 1.2, 0.4, 1) 0.2s both;
+}
+
+.intro-sri-lanka-map .intro-map-pin {
+    left: 21.5%;
+    top: 70%;
+}
+
+.intro-australia-map .intro-map-pin {
+    left: 77%;
+    top: 81%;
+}
+
+.intro-map-pin::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
 .intro-name-mark {
     display: inline-flex;
     align-items: center;
@@ -344,6 +401,23 @@ footer {
     }
 }
 
+@keyframes map-pin-drop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -170%) rotate(-45deg) scale(0.7);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -92%) rotate(-45deg) scale(1.08);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -100%) rotate(-45deg) scale(1);
+    }
+}
+
 @keyframes mouse-wheel-down {
     0% {
         opacity: 0;
@@ -375,6 +449,18 @@ footer {
 
     .intro-actions {
         margin-top: 1rem;
+    }
+
+    .intro-map {
+        right: 1.25rem;
+        top: auto;
+        bottom: 4.5rem;
+        width: clamp(92px, 24vw, 130px);
+        transform: translate(18px, 0) scale(0.94);
+    }
+
+    .intro-map.is-visible {
+        transform: translate(0, 0) scale(1);
     }
 
     .intro-scroll-cue {
@@ -417,6 +503,7 @@ footer {
     }
 
     .intro-wave,
+    .intro-map,
     .intro-name-mark,
     .intro-action,
     .intro-scroll-cue {
@@ -424,6 +511,10 @@ footer {
     }
 
     .scroll-cue-wheel {
+        animation: none;
+    }
+
+    .intro-map-pin {
         animation: none;
     }
 }
