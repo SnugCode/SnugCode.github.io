@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/personal.css">
+    <title>Personal</title>
+</head>
+<body>
+    <main class="personal-grid" aria-label="Personal space">
+        <section class="tile welcome-tile" aria-labelledby="welcome-title">
+            <div class="tile-content">
+                <p class="eyebrow">welcome</p>
+                <h1 class="welcome-title" id="welcome-title"><span class="personal-name">Sujaya</span><span class="personal-title-suffix">'s Personal Space</span></h1>
+                <p class="welcome-copy">A quiet little corner for personal notes, links, experiments, and anything that does not need to sit on the main portfolio.</p>
+            </div>
+        </section>
+
+        <section class="tile goals-tile" aria-labelledby="goals-title">
+            <div class="tile-content">
+                <p class="goals-label" id="goals-title">Goals for <span id="goals-year">2026</span></p>
+                <ul class="goals-list">
+                    <li>Get to 65 Kg</li>
+                    <li>Get a job at a company</li>
+                    <li>Complete setup for now</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="tile time-tile" aria-labelledby="my-time-title">
+            <div class="tile-content time-stack">
+                <div>
+                    <p class="time-label" id="my-time-title">My Time</p>
+                    <p class="time-value" id="melbourne-time">--:--</p>
+                    <p class="time-meta" id="melbourne-meta">Melbourne, Australia</p>
+                </div>
+
+                <div class="time-divider" aria-hidden="true"></div>
+
+                <div>
+                    <p class="time-label">Your Time</p>
+                    <p class="time-value" id="viewer-time">--:--</p>
+                    <p class="timezone-delta" id="timezone-delta">Checking your timezone...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tile books-tile" aria-labelledby="books-title">
+            <div class="tile-content">
+                <p class="books-label" id="books-title">Books</p>
+                <div class="book-current">
+                    <p class="book-kicker">Current read</p>
+                    <img class="book-cover" src="https://m.media-amazon.com/images/I/51bo4giCpRL._SL500_.jpg" alt="A Thousand Sons audiobook cover" loading="lazy" decoding="async">
+                    <div class="book-details">
+                        <h2 class="book-title">A Thousand Sons</h2>
+                        <p class="book-meta">Graham McNeil</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tile socials-tile" aria-labelledby="socials-title">
+            <div class="tile-content">
+                <p class="social-label" id="socials-title">Socials</p>
+                <ul class="social-list">
+                    <li><a href="https://www.instagram.com/sujaya.g_?igsh=ZnAwd2dmbHY0NHgz" aria-label="Instagram profile"><span class="social-icon" aria-hidden="true"><img src="../assets/icons/Instagram.svg" alt="" decoding="async"></span></a></li>
+                    <li><a href="https://open.spotify.com/user/31opjbiycyfmd5r6cqf5i35dstjy" aria-label="Spotify profile"><span class="social-icon" aria-hidden="true"><img src="../assets/icons/Spotify.svg" alt="" decoding="async"></span></a></li>
+                    <li><a href="https://www.linkedin.com/in/snugcode/" aria-label="LinkedIn profile"><span class="social-icon" aria-hidden="true"><img src="../assets/icons/LinkedIn-mini.svg" alt="" decoding="async"></span></a></li>
+                    <li><a href="https://facebook.com/sujaya.gallage" aria-label="Facebook profile"><span class="social-icon" aria-hidden="true"><img src="../assets/icons/Facebook.svg" alt="" decoding="async"></span></a></li>
+                    <li><a href="https://pin.it/7hRozXRb1" aria-label="Pinterest profile"><span class="social-icon" aria-hidden="true"><img src="../assets/icons/Pinterest.svg" alt="" decoding="async"></span></a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const names = ["Sujaya", "Jay", "Snug"];
+        const nameElement = document.querySelector(".personal-name");
+        const titleSuffix = document.querySelector(".personal-title-suffix");
+        let nameIndex = 0;
+
+        setInterval(() => {
+            nameElement.classList.add("is-switching");
+
+            setTimeout(() => {
+                const suffixStart = titleSuffix.getBoundingClientRect().left;
+                nameIndex = (nameIndex + 1) % names.length;
+                nameElement.textContent = names[nameIndex];
+                const suffixEnd = titleSuffix.getBoundingClientRect().left;
+                const suffixShift = suffixStart - suffixEnd;
+
+                titleSuffix.style.transition = "none";
+                titleSuffix.style.transform = `translateX(${suffixShift}px)`;
+                titleSuffix.getBoundingClientRect();
+                titleSuffix.style.transition = "";
+                titleSuffix.style.transform = "";
+
+                nameElement.classList.remove("is-switching");
+            }, 220);
+        }, 2200);
+
+        const melbourneTime = document.querySelector("#melbourne-time");
+        const melbourneMeta = document.querySelector("#melbourne-meta");
+        const viewerTime = document.querySelector("#viewer-time");
+        const timezoneDelta = document.querySelector("#timezone-delta");
+        const goalsYear = document.querySelector("#goals-year");
+        const myTimeZone = "Australia/Melbourne";
+
+        goalsYear.textContent = new Date().getFullYear();
+
+        const timeFormatter = (timeZone) => new Intl.DateTimeFormat([], {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone
+        });
+
+        const zoneFormatter = new Intl.DateTimeFormat([], {
+            timeZoneName: "short",
+            timeZone: myTimeZone
+        });
+
+        function getTimeZoneOffset(date, timeZone) {
+            const parts = new Intl.DateTimeFormat("en-US", {
+                timeZone,
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }).formatToParts(date).reduce((values, part) => {
+                values[part.type] = part.value;
+                return values;
+            }, {});
+
+            const asUtc = Date.UTC(
+                Number(parts.year),
+                Number(parts.month) - 1,
+                Number(parts.day),
+                Number(parts.hour),
+                Number(parts.minute),
+                Number(parts.second)
+            );
+
+            return (asUtc - date.getTime()) / 60000;
+        }
+
+        function formatDelta(minutes) {
+            if (minutes === 0) {
+                return "You're in the same timezone as me.";
+            }
+
+            const absMinutes = Math.abs(minutes);
+            const hours = Math.floor(absMinutes / 60);
+            const mins = absMinutes % 60;
+            const timeParts = [
+                hours ? `${hours}h` : "",
+                mins ? `${mins}m` : ""
+            ].filter(Boolean).join(" ");
+            const direction = minutes > 0 ? "ahead of" : "behind";
+
+            return `You're ${timeParts} ${direction} Melbourne.`;
+        }
+
+        function updateTimes() {
+            const now = new Date();
+            const viewerTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const melbourneOffset = getTimeZoneOffset(now, myTimeZone);
+            const viewerOffset = getTimeZoneOffset(now, viewerTimeZone);
+            const delta = viewerOffset - melbourneOffset;
+            const melbourneZone = zoneFormatter.formatToParts(now).find((part) => part.type === "timeZoneName")?.value || "Melbourne";
+
+            melbourneTime.textContent = timeFormatter(myTimeZone).format(now);
+            melbourneMeta.textContent = `${melbourneZone} | Melbourne, Australia`;
+            viewerTime.textContent = timeFormatter(viewerTimeZone).format(now);
+            timezoneDelta.textContent = formatDelta(delta);
+        }
+
+        updateTimes();
+        setInterval(updateTimes, 1000);
+    </script>
+</body>
+</html>
