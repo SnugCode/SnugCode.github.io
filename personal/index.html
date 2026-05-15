@@ -6,9 +6,14 @@
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="../css/typography.css">
     <link rel="stylesheet" href="../css/personal.css">
+    <link rel="stylesheet" href="../css/root-folder.css">
+    <link rel="stylesheet" href="../css/page-transition.css">
     <title>Personal</title>
 </head>
 <body>
+    <nav class="site-path personal-path" aria-label="Current site path">
+        <a href="../root.html">..</a><a href="./" aria-current="page">personal</a>
+    </nav>
     <main class="personal-grid" aria-label="Personal space">
         <section class="tile welcome-tile" aria-labelledby="welcome-title">
             <div class="tile-content">
@@ -61,6 +66,13 @@
             </div>
         </section>
 
+        <section class="tile status-tile" aria-labelledby="status-title">
+            <div class="tile-content">
+                <p class="status-label" id="status-title">Current Status</p>
+                <p class="status-value">Working on RevPay</p>
+            </div>
+        </section>
+
         <section class="tile socials-tile" aria-labelledby="socials-title">
             <div class="tile-content">
                 <p class="social-label" id="socials-title">Socials</p>
@@ -75,6 +87,7 @@
         </section>
     </main>
 
+    <script type="module" src="../js/page-transition.js"></script>
     <script>
         const names = ["Sujaya", "Jay", "Snug"];
         const nameElement = document.querySelector(".personal-name");

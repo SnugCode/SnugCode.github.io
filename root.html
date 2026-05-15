@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/root-folder.css">
+    <link rel="stylesheet" href="css/page-transition.css">
+    <title>Root</title>
+</head>
+<body class="root-page" data-os="linux">
+    <div class="os-switcher" data-os-switcher>
+        <button class="os-switcher-toggle" type="button" aria-expanded="false" aria-controls="os-switcher-options" data-os-option="linux">
+            Linux
+        </button>
+        <div class="os-switcher-options" id="os-switcher-options">
+            <button type="button" data-os-option="windows">Windows</button>
+            <button type="button" data-os-option="macos">MacOS</button>
+        </div>
+    </div>
+
+    <main class="root-shell" aria-labelledby="root-title">
+        <section class="root-directory" aria-label="Root folders">
+            <p class="root-kicker">/</p>
+            <h1 id="root-title">root</h1>
+            <nav class="root-directory-list" aria-label="Root folders">
+                <a href="index.html#intro">/professional</a>
+                <a href="personal/">/personal</a>
+            </nav>
+        </section>
+
+        <section class="windows-desktop" aria-label="Windows root folders">
+            <div class="windows-shortcuts">
+                <a class="windows-shortcut" href="index.html#intro">
+                    <span class="windows-shortcut-icon" aria-hidden="true">P</span>
+                    <span>Professional</span>
+                </a>
+                <a class="windows-shortcut" href="personal/">
+                    <span class="windows-shortcut-icon" aria-hidden="true">S</span>
+                    <span>Personal</span>
+                </a>
+            </div>
+
+            <div class="windows-start-menu" id="windows-start-menu" aria-label="Start menu">
+                <div class="windows-start-menu-left">
+                    <a href="index.html#intro">
+                        <span class="windows-start-menu-icon" aria-hidden="true"></span>
+                        <span>Professional</span>
+                    </a>
+                    <a href="personal/">
+                        <span class="windows-start-menu-icon" aria-hidden="true"></span>
+                        <span>Personal</span>
+                    </a>
+                    <div class="windows-start-search" aria-hidden="true">Search programs and files</div>
+                </div>
+                <div class="windows-start-menu-right">
+                    <strong>SnugCode</strong>
+                    <a href="index.html#intro">Portfolio</a>
+                    <a href="personal/">Personal Space</a>
+                    <a href="pages/blog.html">Blog</a>
+                    <span>Root</span>
+                </div>
+            </div>
+
+            <nav class="windows-taskbar" aria-label="Windows taskbar">
+                <button class="windows-start" type="button" aria-label="Start menu" aria-expanded="false" aria-controls="windows-start-menu"></button>
+                <div class="windows-taskbar-apps" aria-hidden="true"></div>
+                <time class="windows-clock" aria-label="System clock">
+                    <span id="windows-clock-time">--:--</span>
+                    <span id="windows-clock-date">--/--/----</span>
+                </time>
+            </nav>
+        </section>
+
+        <section class="macos-desktop" aria-label="MacOS root folders">
+            <nav class="macos-menu-bar" aria-label="MacOS menu bar">
+                <strong>Finder</strong>
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Go</span>
+                <span class="macos-wifi" aria-label="Network status">
+                    <span class="macos-wifi-icon" aria-hidden="true"></span>
+                    <span id="macos-wifi-name">Online</span>
+                </span>
+                <time id="macos-clock" aria-label="System clock">--:--</time>
+            </nav>
+
+            <div class="macos-folders">
+                <a class="macos-folder" href="index.html#intro">
+                    <span class="macos-folder-icon" aria-hidden="true"></span>
+                    <span>Professional</span>
+                </a>
+                <a class="macos-folder" href="personal/">
+                    <span class="macos-folder-icon" aria-hidden="true"></span>
+                    <span>Personal</span>
+                </a>
+            </div>
+
+            <nav class="macos-dock" aria-label="MacOS dock">
+                <button class="macos-dock-finder" type="button" aria-label="Finder"></button>
+                <button class="macos-dock-trash" type="button" aria-label="Trash"></button>
+            </nav>
+        </section>
+
+        <section class="linux-terminal-shell" aria-label="Linux terminal">
+            <div class="linux-terminal">
+                <div class="linux-terminal-screen" data-linux-terminal-output>
+                    <p>snugOS root shell</p>
+                </div>
+                <form class="linux-terminal-form" data-linux-terminal-form>
+                    <label for="linux-terminal-input">snug@root:/ $</label>
+                    <input id="linux-terminal-input" name="command" autocomplete="off" spellcheck="false" autofocus>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="js/page-transition.js"></script>
+    <script>
+        const osSwitcher = document.querySelector("[data-os-switcher]");
+        const osToggle = osSwitcher?.querySelector(".os-switcher-toggle");
+        const windowsClockTime = document.querySelector("#windows-clock-time");
+        const windowsClockDate = document.querySelector("#windows-clock-date");
+        const windowsStart = document.querySelector(".windows-start");
+        const windowsStartMenu = document.querySelector(".windows-start-menu");
+        const macosClock = document.querySelector("#macos-clock");
+        const macosWifiName = document.querySelector("#macos-wifi-name");
+        const osLabels = {
+            windows: "Windows",
+            macos: "MacOS",
+            linux: "Linux"
+        };
+        const osOrder = ["windows", "macos", "linux"];
+        const linuxTerminalOutput = document.querySelector("[data-linux-terminal-output]");
+        const linuxTerminalForm = document.querySelector("[data-linux-terminal-form]");
+        const linuxTerminalInput = document.querySelector("#linux-terminal-input");
+        const windowsTimeFormatter = new Intl.DateTimeFormat([], {
+            hour: "numeric",
+            minute: "2-digit"
+        });
+        const windowsDateFormatter = new Intl.DateTimeFormat([], {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        });
+
+        function updateWindowsClock() {
+            const now = new Date();
+
+            windowsClockTime.textContent = windowsTimeFormatter.format(now);
+            windowsClockDate.textContent = windowsDateFormatter.format(now);
+            document.querySelector(".windows-clock")?.setAttribute("datetime", now.toISOString());
+            macosClock.textContent = windowsTimeFormatter.format(now);
+            macosClock.setAttribute("datetime", now.toISOString());
+        }
+
+        function updateNetworkStatus() {
+            macosWifiName.textContent = navigator.onLine ? "Online" : "Offline";
+        }
+
+        function getPreferredOs() {
+            const platform = [
+                navigator.userAgentData?.platform,
+                navigator.platform,
+                navigator.userAgent
+            ].filter(Boolean).join(" ").toLowerCase();
+
+            if (platform.includes("win")) return "windows";
+            if (platform.includes("mac")) return "macos";
+            if (platform.includes("linux") || platform.includes("x11")) return "linux";
+
+            return "linux";
+        }
+
+        function setActiveOs(selectedOs) {
+            const optionButtons = Array.from(osSwitcher.querySelectorAll(".os-switcher-options [data-os-option]"));
+            const otherOptions = osOrder.filter((os) => os !== selectedOs);
+
+            document.body.dataset.os = selectedOs;
+            osToggle.dataset.osOption = selectedOs;
+            osToggle.textContent = osLabels[selectedOs];
+
+            optionButtons.forEach((button, index) => {
+                const os = otherOptions[index];
+
+                button.dataset.osOption = os;
+                button.textContent = osLabels[os];
+            });
+        }
+
+        function navigateFromTerminal(url) {
+            if (window.SnugCodeTransition) {
+                window.SnugCodeTransition.go(url);
+                return;
+            }
+
+            window.location.href = url;
+        }
+
+        function setWindowsStartMenu(isOpen) {
+            windowsStartMenu.classList.toggle("is-open", isOpen);
+            windowsStart.setAttribute("aria-expanded", String(isOpen));
+        }
+
+        osToggle?.addEventListener("click", () => {
+            const isOpen = osSwitcher.classList.toggle("is-open");
+            osToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        osSwitcher?.addEventListener("click", (event) => {
+            const option = event.target.closest("[data-os-option]");
+
+            if (!option || option === osToggle) return;
+
+            const selectedOs = option.dataset.osOption;
+
+            setActiveOs(selectedOs);
+            setWindowsStartMenu(false);
+
+            osSwitcher.classList.remove("is-open");
+            osToggle.setAttribute("aria-expanded", "false");
+
+            if (selectedOs === "linux") {
+                linuxTerminalInput.focus();
+            }
+        });
+
+        windowsStart?.addEventListener("click", () => {
+            setWindowsStartMenu(!windowsStartMenu.classList.contains("is-open"));
+        });
+
+        document.addEventListener("click", (event) => {
+            if (
+                document.body.dataset.os !== "windows" ||
+                !windowsStartMenu.classList.contains("is-open") ||
+                event.target.closest(".windows-start-menu") ||
+                event.target.closest(".windows-start")
+            ) {
+                return;
+            }
+
+            setWindowsStartMenu(false);
+        });
+
+        document.addEventListener("click", (event) => {
+            if (
+                document.body.dataset.os !== "linux" ||
+                event.target.closest(".os-switcher")
+            ) {
+                return;
+            }
+
+            linuxTerminalInput.focus();
+        });
+
+        function appendTerminalLine(content, className = "") {
+            const line = document.createElement("p");
+            line.textContent = content;
+
+            if (className) {
+                line.className = className;
+            }
+
+            linuxTerminalOutput.append(line);
+            linuxTerminalOutput.scrollTop = linuxTerminalOutput.scrollHeight;
+        }
+
+        linuxTerminalForm?.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const command = linuxTerminalInput.value.trim();
+            const normalizedCommand = command.toLowerCase();
+
+            if (!command) return;
+
+            appendTerminalLine(`snug@root:/ $ ${command}`, "linux-terminal-command");
+            linuxTerminalInput.value = "";
+
+            if (normalizedCommand === "clear") {
+                linuxTerminalOutput.replaceChildren();
+                return;
+            }
+
+            if (normalizedCommand === "ls") {
+                appendTerminalLine("professional/  personal/");
+                return;
+            }
+
+            if (normalizedCommand === "pwd") {
+                appendTerminalLine("/");
+                return;
+            }
+
+            if (normalizedCommand === "cd personal" || normalizedCommand === "cd ./personal") {
+                navigateFromTerminal("personal/");
+                return;
+            }
+
+            if (
+                normalizedCommand === "cd professional" ||
+                normalizedCommand === "cd ./professional" ||
+                normalizedCommand === "cd proffessional" ||
+                normalizedCommand === "cd ./proffessional"
+            ) {
+                navigateFromTerminal("index.html#intro");
+                return;
+            }
+
+            if (normalizedCommand.startsWith("cd ")) {
+                appendTerminalLine(`cd: no such file or directory: ${command.slice(3)}`, "linux-terminal-error");
+                return;
+            }
+
+            appendTerminalLine(`command not found: ${command}`, "linux-terminal-error");
+        });
+
+        linuxTerminalInput?.addEventListener("keydown", (event) => {
+            if (event.key !== "Tab") return;
+
+            event.preventDefault();
+
+            const value = linuxTerminalInput.value;
+            const normalizedValue = value.toLowerCase();
+            let completions = ["ls", "pwd", "clear", "cd personal", "cd professional"];
+            let matches = completions.filter((completion) => completion.startsWith(normalizedValue));
+
+            if (normalizedValue.startsWith("cd ")) {
+                const directoryInput = normalizedValue.slice(3);
+                completions = ["personal", "professional"];
+                matches = completions.filter((completion) => completion.startsWith(directoryInput));
+
+                if (matches.length === 1) {
+                    linuxTerminalInput.value = `cd ${matches[0]}`;
+                    return;
+                }
+
+                if (matches.length > 1) {
+                    appendTerminalLine(matches.join("  "));
+                }
+
+                return;
+            }
+
+            if (matches.length === 1) {
+                linuxTerminalInput.value = matches[0];
+                return;
+            }
+
+            if (matches.length > 1) {
+                appendTerminalLine(matches.join("  "));
+            }
+        });
+
+        setActiveOs(getPreferredOs());
+        if (document.body.dataset.os === "linux") {
+            linuxTerminalInput.focus();
+        }
+        updateWindowsClock();
+        updateNetworkStatus();
+        setInterval(updateWindowsClock, 1000);
+        window.addEventListener("online", updateNetworkStatus);
+        window.addEventListener("offline", updateNetworkStatus);
+    </script>
+</body>
+</html>

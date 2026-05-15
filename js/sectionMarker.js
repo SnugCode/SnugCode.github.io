@@ -3,20 +3,42 @@ export function initSectionMarker() {
     if (!marker) return;
 
     const sections = [
-        ["#intro", "/intro.mp4"],
-        ["#projects", "projects/"],
-        ["#stack", "stack/"],
-        ["#education", "education/"],
-        ["footer", "footer/"]
-    ].map(([selector, label]) => ({
+        ["#intro", "#intro", "intro.mp4"],
+        ["#projects", "#projects", "projects"],
+        ["#stack", "#stack", "stack"],
+        ["#education", "#education", "education"],
+        ["footer", "#intro", "footer"]
+    ].map(([selector, href, current]) => ({
         element: document.querySelector(selector),
-        label
+        href,
+        current
     })).filter((item) => item.element);
 
     if (!sections.length) return;
 
+    function renderPath(section) {
+        marker.replaceChildren();
+
+        [
+            { label: "..", href: "root.html" },
+            { label: "professional", href: "#intro" },
+            { label: section.current, href: section.href, current: true }
+        ].forEach((part) => {
+            const link = document.createElement("a");
+            link.href = part.href;
+            link.textContent = part.label;
+
+            if (part.current) {
+                link.setAttribute("aria-current", "location");
+            }
+
+            marker.append(link);
+        });
+    }
+
+    renderPath(sections[0]);
+
     if (!("IntersectionObserver" in window)) {
-        marker.textContent = sections[0].label;
         return;
     }
 
@@ -28,11 +50,11 @@ export function initSectionMarker() {
         if (!activeEntry) return;
 
         const activeSection = sections.find((section) => section.element === activeEntry.target);
-        if (!activeSection || marker.textContent === activeSection.label) return;
+        if (!activeSection || marker.querySelector('[aria-current="location"]')?.textContent === activeSection.current) return;
 
         marker.classList.add("is-changing");
         window.setTimeout(() => {
-            marker.textContent = activeSection.label;
+            renderPath(activeSection);
             marker.classList.remove("is-changing");
         }, 120);
     }, {

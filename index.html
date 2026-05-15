@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/main.css"> 
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/root-folder.css">
+    <link rel="stylesheet" href="css/page-transition.css">
     
     <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/FavIconBlack16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/FavIconBlack32.png">
@@ -30,7 +32,7 @@
             <span class="theme-toggle-icon" aria-hidden="true">☾</span>
         </button>
      </div>
-     <div class="section-marker" aria-live="polite">/intro.mp4</div>
+     <nav class="section-marker site-path" aria-label="Current site path" aria-live="polite"></nav>
      <section id="intro">
         <div class="text">
             <p class="typing-intro" aria-label="Hi! Nice to meet you. My name is SnugCode. I was born in Colombo, Sri Lanka. I am currently residing in Melbourne, Australia. Welcome to my portfolio. Feel free to explore. If you wanna get in touch with me; These are for you. If you want to read my thoughts? Feel free to checkout my blog page.">
@@ -160,6 +162,8 @@
             if (link) {
                 if (link.target === '_blank') {
                     window.open(link.href, '_blank', 'noopener');
+                } else if (window.SnugCodeTransition) {
+                    window.SnugCodeTransition.go(link.href);
                 } else {
                     window.location.href = link.href;
                 }
@@ -343,6 +347,7 @@
             }
         })();
     </script>
+    <script type="module" src="js/page-transition.js"></script>
     <script type="module" src="js/main.js" defer></script>
 </body>
 </html>
