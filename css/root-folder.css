@@ -50,15 +50,6 @@
     transform: translateY(-1px);
 }
 
-@media (max-width: 560px) {
-    .site-path {
-        top: 1.1rem;
-        left: 1rem;
-        max-width: calc(100vw - 9.5rem);
-        font-size: 0.82rem;
-    }
-}
-
 .root-page {
     min-height: 100svh;
     margin: 0;
@@ -803,83 +794,4 @@
 
 .os-switcher.is-open .os-switcher-options button {
     transform: translateX(0) scale(1);
-}
-
-@media (max-width: 560px) {
-    .os-switcher {
-        top: 0.9rem;
-        right: 1rem;
-        gap: 6px;
-    }
-
-    .os-switcher button {
-        min-height: 34px;
-        padding: 0 10px;
-        font-size: 0.68rem;
-    }
-
-    .root-page[data-os="windows"] .windows-desktop {
-        padding: 76px 18px 66px;
-    }
-
-    .windows-taskbar {
-        grid-template-columns: auto 1fr;
-        height: auto;
-        min-height: 52px;
-    }
-
-    .windows-start-menu {
-        left: 6px;
-        bottom: 52px;
-        grid-template-columns: 1fr;
-        width: calc(100vw - 12px);
-        min-height: 0;
-    }
-
-    .windows-start-menu-right {
-        display: none;
-    }
-
-    .windows-clock {
-        display: none;
-    }
-
-    .windows-taskbar-apps {
-        overflow-x: auto;
-    }
-
-    .root-page[data-os="macos"] .macos-desktop {
-        padding: 68px 18px 108px;
-    }
-
-    .macos-menu-bar {
-        gap: 10px;
-        font-size: 0.7rem;
-    }
-
-    .macos-folders {
-        margin-left: 0;
-    }
-
-    .macos-dock {
-        bottom: 12px;
-        max-width: calc(100vw - 24px);
-        min-height: 58px;
-        padding: 8px 10px;
-    }
-
-    .macos-dock button {
-        width: 44px;
-        height: 44px;
-        border-radius: 11px;
-    }
-
-    .root-page[data-os="linux"] .linux-terminal-shell {
-        padding: 64px 14px 22px;
-    }
-
-    .linux-terminal-form {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
 }
