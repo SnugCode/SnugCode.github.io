@@ -453,8 +453,10 @@ footer {
     #intro {
         align-items: flex-start;
         height: 100svh;
-        min-height: 100svh;
+        height: 100dvh;
+        min-height: 0;
         max-height: 100svh;
+        max-height: 100dvh;
         padding-top: clamp(4.5rem, 14svh, 6rem);
         padding-bottom: 0;
     }
@@ -486,6 +488,7 @@ footer {
     }
 
     .intro-wave {
+        position: absolute;
         right: 1.25rem;
         top: auto;
         bottom: max(0.85rem, env(safe-area-inset-bottom));
@@ -521,6 +524,7 @@ footer {
     }
 
     .intro-map {
+        position: absolute;
         right: 1.25rem;
         top: auto;
         bottom: max(0.85rem, env(safe-area-inset-bottom));
