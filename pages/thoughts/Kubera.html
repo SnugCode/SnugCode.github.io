@@ -34,29 +34,66 @@
     <main class="thought-page">
         <article class="thought-article">
             <a class="thought-back-link" href="../blog.html">&#8592; Back to blog</a>
-            <p class="thought-kicker">Project thoughts</p>
-            <h1>Kubera</h1>
-            <p class="thought-lede">
-                Kubera is my local personal finance tracker: a private place to understand money habits without needing to hand that data to another service.
-            </p>
+            <header class="thought-header">
+                <div class="thought-header-top">
+                    <p class="thought-kicker">Project thoughts</p>
+                    <a class="thought-header-link" href="https://github.com/SnugCode/Kubera" target="_blank" rel="noopener">View on GitHub &#8594;</a>
+                </div>
+                <h1>Kubera</h1>
+                <p class="thought-lede">
+                    I've used other budgeting apps and they all have the same problem: they're not flexible enough for how I actually live. So I decided to build my own.
+                </p>
+            </header>
+            <div class="thought-body">
+                <div class="thought-section">
+                    <h2>Why I Built It</h2>
+                    <p>
+                        Most budgeting apps assume a lot about how you earn and how you spend, and when reality doesn't match that assumption, the whole thing falls apart. Kubera is my attempt at a budgeting tool that works the way I think, not the way a product manager assumed I would.
+                    </p>
+                </div>
 
-            <h2>Why I Built It</h2>
-            <p>
-                Personal finance tools are most useful when they are honest, fast, and close to the person using them. I wanted Kubera to feel practical first: record what matters, make patterns visible, and keep the experience grounded around everyday decisions.
-            </p>
+                <div class="thought-section">
+                    <h2>What I Focused On</h2>
+                    <p>
+                        The main thing I wanted to get right was working off my weekly paycheck rather than a monthly income figure. Monthly income can vary, and trying to plan off a number that shifts from one month to the next makes it genuinely hard to stay on top of things. You either overestimate and overspend, or underestimate and stress yourself out for no reason.
+                    </p>
+                    <p>
+                        So I flipped it. By anchoring everything to the weekly paycheck, with bills, expenses, loans, and other financial obligations already set ahead of time, I can see at a glance exactly what I have left to work with before I've committed a single cent. There's no guessing, no mental arithmetic mid-week, just a clear picture of what's available and where it needs to go.
+                    </p>
+                    <p>
+                        That clarity is what keeps me from being wasteful. Not willpower, not discipline, just having the right information in front of me at the right time.
+                    </p>
+                </div>
 
-            <h2>What I Focused On</h2>
-            <p>
-                The main idea was control. Running locally keeps the project simple to reason about and gives me room to shape the workflow around my own needs, from tracking spending to reviewing trends over time.
-            </p>
+                <div class="thought-section">
+                    <h2>Why It Matters</h2>
+                    <p>
+                        I think a lot of budgeting tools are designed around monthly income because that's the tidy, textbook version of how money works. But for anyone on a weekly pay cycle, that mismatch creates friction at every step. You're constantly converting, estimating, and second-guessing yourself.
+                    </p>
+                    <p>
+                        Kubera is built around the paycheck you actually receive, not an average or a projection. If you get paid weekly, you should be budgeting weekly. It really is that straightforward.
+                    </p>
+                </div>
 
-            <h2>What I Learned</h2>
-            <p>
-                Kubera has been a useful exercise in designing around real habits instead of imaginary perfect users. Finance software can become noisy very quickly, so the challenge is choosing what to show and what to leave quiet.
-            </p>
+                <div class="thought-section">
+                    <h2>Priority Page</h2>
+                    <p>
+                        One of the features I'm most happy with is the priority page. The idea is simple: instead of just tracking what you spend, you tell Kubera what matters most. You set a priority order for where your money should go first, and the app works down the list from there. So your rent gets covered before your subscriptions, and your subscriptions get covered before anything discretionary.
+                    </p>
+                    <p>
+                        You can also reorder the list at any point, so if your situation changes, your budget adjusts with it without needing to rebuild everything from scratch.
+                    </p>
+                </div>
 
-            <div class="thought-actions">
-                <a href="https://github.com/SnugCode/Kubera" target="_blank" rel="noopener">View on GitHub</a>
+                <div class="thought-section">
+                    <h2>Linked Items</h2>
+                    <p>
+                        The other thing I wanted to get right was avoiding duplication. If you have Rent sitting in your priority list and also listed as an expense, most apps would treat them as two completely separate entries. That gets messy fast and breaks the whole flow.
+                    </p>
+                    <p>
+                        In Kubera, if two items share the same name they get linked automatically and treated as one unified entry across the app. So your Rent is your Rent, whether you're looking at your priority list or your expense breakdown. You're never managing the same thing in two places.
+                    </p>
+                </div>
             </div>
         </article>
     </main>

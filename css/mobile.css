@@ -187,7 +187,9 @@
         font-size: clamp(3.5rem, 18vw, 5rem);
     }
 
-    .blog-columns {
+    .blog-story--featured,
+    .blog-columns,
+    .blog-columns--two {
         grid-template-columns: 1fr;
     }
 
@@ -196,8 +198,16 @@
         width: auto;
     }
 
-    .blog-story--lead .blog-story-headline {
+    .blog-story--featured .blog-story-headline {
         font-size: clamp(2rem, 9vw, 2.8rem);
+    }
+
+    .thought-page {
+        padding: 6rem 1.25rem 3rem;
+    }
+
+    .thought-body {
+        column-count: 1;
     }
 }
 

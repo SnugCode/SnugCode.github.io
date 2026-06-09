@@ -864,8 +864,7 @@ footer {
 }
 
 .thought-article {
-  width: min(780px, 100%);
-  margin: 0 auto;
+  width: 100%;
 }
 
 .thought-article h1,
@@ -888,19 +887,24 @@ footer {
   color: var(--text);
 }
 
-.thought-kicker {
-  position: relative;
-  margin: 0 0 0.5rem;
-  padding-top: 0.65rem;
-  border-top: 4px solid var(--text);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--subtle-text);
+/* ── Header (full-width masthead) ── */
+.thought-header {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-strong);
+  margin-bottom: 0;
 }
 
-.thought-kicker::before {
+.thought-header-top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 0.65rem;
+  border-top: 4px solid var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.thought-header-top::before {
   content: "";
   position: absolute;
   top: 4px;
@@ -911,9 +915,33 @@ footer {
   opacity: 0.5;
 }
 
+.thought-kicker {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--subtle-text);
+}
+
+.thought-header-link {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--subtle-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.18s ease;
+}
+
+.thought-header-link:hover {
+  color: var(--text);
+}
+
 .thought-article h1 {
   font-family: 'playfair-display', Georgia, 'Times New Roman', serif;
-  font-size: clamp(3rem, 10vw, 6.5rem);
+  font-size: clamp(3rem, 10vw, 7rem);
   font-style: italic;
   font-weight: 900;
   line-height: 0.95;
@@ -922,36 +950,44 @@ footer {
 }
 
 .thought-lede {
-  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
   font-style: italic;
   color: var(--muted-text);
   line-height: 1.7;
-  padding-bottom: 1.75rem;
-  border-bottom: 1px solid var(--border-strong);
-  margin-bottom: 0;
+  max-width: 820px;
+  margin: 0;
+}
+
+/* ── Body (newspaper columns) ── */
+.thought-body {
+  column-count: 3;
+  column-gap: 3rem;
+  column-rule: 1px solid var(--border-strong);
+  padding-top: 1.75rem;
+}
+
+.thought-section {
+  break-inside: avoid;
+  margin-bottom: 0.25rem;
 }
 
 .thought-article h2 {
   font-family: 'playfair-display', Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.25rem, 3.5vw, 1.85rem);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
   font-weight: 700;
   line-height: 1.2;
-  margin: 2.5rem 0 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-strong);
+  margin: 0 0 0.5rem;
 }
 
 .thought-article p {
   color: var(--muted-text);
-  font-size: 1rem;
+  font-size: 0.97rem;
   line-height: 1.85;
-  margin: 0.75rem 0;
+  margin: 0 0 0.75rem;
 }
 
 .thought-actions {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-strong);
+  margin-top: 0;
 }
 
 .thought-actions a {
@@ -1071,12 +1107,43 @@ footer {
   border-bottom: 1px solid var(--border-strong);
 }
 
+/* ── Featured single story ── */
+.blog-story--featured {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 2.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.blog-story--featured .blog-story-kicker {
+  margin-bottom: 0.75rem;
+}
+
+.blog-story--featured .blog-story-headline {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-style: italic;
+}
+
+.blog-story-featured-left,
+.blog-story-featured-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  padding: 0.5rem 0;
+}
+
 /* ── Column grid ── */
 .blog-columns {
   display: grid;
   grid-template-columns: 2fr 1px 1fr 1px 1fr;
   gap: 0 2.5rem;
   padding: 0.25rem 0;
+}
+
+.blog-columns--two {
+  grid-template-columns: 1fr 1px 1fr;
 }
 
 .blog-col-rule {
@@ -1103,8 +1170,6 @@ footer {
   text-transform: uppercase;
   color: var(--subtle-text);
   margin: 0;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid var(--border-strong);
 }
 
 .blog-story-headline {
@@ -1132,8 +1197,6 @@ footer {
 .blog-story-link {
   display: inline-block;
   margin-top: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-strong);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.06em;
