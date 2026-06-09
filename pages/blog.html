@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="../css/root-folder.css">
     <link rel="stylesheet" href="../css/mobile.css">
     <link rel="stylesheet" href="../css/page-transition.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo/FavIconBlack16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo/FavIconBlack32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="../assets/logo/FavIconBlack48.png">
@@ -36,69 +39,47 @@
     </div>
 
     <main class="blog-page">
-        <header class="blog-hero">
-            <a class="blog-back-link" href="../index.html#intro">Back to portfolio</a>
-            <p class="blog-kicker">SnugCode writing</p>
-            <h1>Blog</h1>
-            <p>
-                A central home for project notes, build logs, and the occasional longer thought while I keep learning, shipping, and refining my work.
-            </p>
+        <header class="blog-masthead">
+            <div class="blog-edition-line">
+                <span>Project Notes &amp; Build Logs</span>
+                <span>Est. 2025</span>
+            </div>
+            <div class="blog-rule-double" aria-hidden="true"><span></span><span></span></div>
+            <h1 class="blog-nameplate">Blog</h1>
+            <div class="blog-rule-double" aria-hidden="true"><span></span><span></span></div>
+            <p class="blog-tagline">A record of projects, decisions, and small lessons learned while building.</p>
+            <div class="blog-rule-single" aria-hidden="true"></div>
         </header>
 
-        <section class="blog-section" aria-labelledby="latest-writing">
-            <div class="blog-section-heading">
-                <h2 id="latest-writing">Latest Thoughts</h2>
-                <p>Notes connected to the projects in my portfolio.</p>
-            </div>
-
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div>
-                        <p class="blog-card-meta">Project thoughts</p>
-                        <h3>Kubera</h3>
-                        <p>
-                            Reflections on building a local personal finance tracker around privacy, clarity, and everyday money habits.
-                        </p>
-                    </div>
-                    <a class="blog-card-link" href="thoughts/Kubera.html">Read notes</a>
+        <section class="blog-stories" aria-label="Latest thoughts">
+            <div class="blog-section-rule" aria-hidden="true"><span>Latest Thoughts</span></div>
+            <div class="blog-columns">
+                <article class="blog-story blog-story--lead">
+                    <p class="blog-story-kicker">Project Thoughts</p>
+                    <h2 class="blog-story-headline">Kubera</h2>
+                    <p class="blog-story-deck">Reflections on building a local personal finance tracker around privacy, clarity, and everyday money habits.</p>
+                    <a class="blog-story-link" href="thoughts/Kubera.html">Read notes &#8594;</a>
                 </article>
-
-                <article class="blog-card blog-card-disabled">
-                    <div>
-                        <p class="blog-card-meta">Project thoughts</p>
-                        <h3>The Avenue School</h3>
-                        <p>
-                            A future writeup on the capstone process, redesign decisions, and what changed across the build.
-                        </p>
-                    </div>
-                    <span class="blog-card-link blog-card-link-disabled">WIP</span>
+                <div class="blog-col-rule" aria-hidden="true"></div>
+                <article class="blog-story">
+                    <p class="blog-story-kicker">Project Thoughts</p>
+                    <h2 class="blog-story-headline">The Avenue School</h2>
+                    <p class="blog-story-deck">A writeup on the capstone process, redesign decisions, and what changed across the build.</p>
+                    <a class="blog-story-link" href="thoughts/TAS.html">Read notes &#8594;</a>
                 </article>
-
-                <article class="blog-card blog-card-disabled">
-                    <div>
-                        <p class="blog-card-meta">Project thoughts</p>
-                        <h3>Ceylon Vale</h3>
-                        <p>
-                            Notes on shaping a small marketing site, brand presentation, and the practical tradeoffs behind it.
-                        </p>
-                    </div>
-                    <span class="blog-card-link blog-card-link-disabled">WIP</span>
+                <div class="blog-col-rule" aria-hidden="true"></div>
+                <article class="blog-story blog-story--disabled">
+                    <p class="blog-story-kicker">Project Thoughts</p>
+                    <h2 class="blog-story-headline">Ceylon Vale</h2>
+                    <p class="blog-story-deck">Notes on shaping a small marketing site, brand presentation, and the practical tradeoffs behind it.</p>
+                    <span class="blog-story-wip">In Progress</span>
                 </article>
             </div>
         </section>
 
-        <section class="blog-section" aria-labelledby="future-writing">
-            <div class="blog-section-heading">
-                <h2 id="future-writing">Future Notes</h2>
-                <p>Space for essays, experiments, and small lessons that do not belong to one project.</p>
-            </div>
-
-            <div class="blog-empty-state">
-                <h3>More writing soon</h3>
-                <p>
-                    This hub is ready for new posts as they come together. For now, the project notes are the starting shelf.
-                </p>
-            </div>
+        <section aria-label="Future writing">
+            <div class="blog-section-rule" aria-hidden="true"><span>Future Notes</span></div>
+            <p class="blog-future-note">More writing coming soon &#8212; essays, experiments, and small lessons.</p>
         </section>
     </main>
 

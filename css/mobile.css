@@ -180,22 +180,24 @@
     }
 
     .blog-page {
-        width: min(100% - 2rem, 640px);
-        padding-top: 7rem;
+        padding: 6rem 1.25rem 3rem;
     }
 
-    .blog-hero {
-        min-height: 55vh;
+    .blog-nameplate {
+        font-size: clamp(3.5rem, 18vw, 5rem);
     }
 
-    .blog-section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .blog-grid {
+    .blog-columns {
         grid-template-columns: 1fr;
+    }
+
+    .blog-col-rule {
+        height: 1px;
+        width: auto;
+    }
+
+    .blog-story--lead .blog-story-headline {
+        font-size: clamp(2rem, 9vw, 2.8rem);
     }
 }
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SnugCode">
+    <meta name="description" content="Thoughts on designing and building The Avenue School website.">
+
+    <link rel="stylesheet" href="../../css/typography.css">
+    <link rel="stylesheet" href="../../css/themes.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/root-folder.css">
+    <link rel="stylesheet" href="../../css/mobile.css">
+    <link rel="stylesheet" href="../../css/page-transition.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/logo/FavIconBlack16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/logo/FavIconBlack32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../assets/logo/FavIconBlack48.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/logo/FavIconWhite16.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/logo/FavIconWhite32.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../assets/logo/FavIconWhite48.png" media="(prefers-color-scheme: dark)">
+
+    <title>The Avenue School Thoughts | SnugCode</title>
+</head>
+<body>
+    <nav class="site-path" aria-label="Current site path">
+        <a href="../../root.html">..</a><a href="../../index.html#intro">professional</a><a href="../blog.html">blog</a><a href="TAS.html" aria-current="page">the avenue school</a>
+    </nav>
+    <div class="site-controls">
+        <a class="site-logo" href="../../index.html#intro" aria-label="SnugCode home">
+            <img class="theme-logo" src="../../assets/logo/LogoWhite.png" alt="SnugCode" decoding="async">
+        </a>
+    </div>
+
+    <main class="thought-page">
+        <article class="thought-article">
+            <a class="thought-back-link" href="../blog.html">&#8592; Back to blog</a>
+            <p class="thought-kicker">Project Thoughts</p>
+            <h1>The Avenue School</h1>
+            <p class="thought-lede">
+                A capstone redesign of The Avenue School's web presence — balancing accessibility, clarity, and the practical realities of building for a real institution.
+            </p>
+
+            <h2>The Brief</h2>
+            <p>
+                The Avenue School serves students with diverse learning needs. The existing site made it difficult for families to find essential information quickly. The goal was a redesign that prioritised clarity above everything else — no unnecessary complexity, no buried navigation.
+            </p>
+
+            <h2>Design Decisions</h2>
+            <p>
+                Early versions leaned too heavily on visual variety. The revision stripped that back: consistent type scale, high contrast ratios throughout, and a navigation structure built around the questions families actually ask. Every layout choice was weighed against how it read on a mid-range mobile device.
+            </p>
+
+            <h2>What Changed Across the Build</h2>
+            <p>
+                The information architecture shifted twice during the project as feedback revealed how different stakeholders — parents, staff, prospective families — prioritised different content. That tension shaped the final hierarchy more than any individual design preference.
+            </p>
+
+            <h2>What I Took Away</h2>
+            <p>
+                Designing for institutions means designing for people who are often stressed or time-poor. Speed to the right information matters more than aesthetic ambition. The project reinforced that restraint is a design decision, not a compromise.
+            </p>
+
+            <div class="thought-actions">
+                <a href="../../index.html#projects">View in projects</a>
+            </div>
+        </article>
+    </main>
+
+    <script type="module" src="../../js/page-transition.js"></script>
+    <script type="module">
+        import { initTheme } from "../../js/theme.js";
+        document.addEventListener("DOMContentLoaded", () => {
+            initTheme();
+        });
+    </script>
+</body>
+</html>
