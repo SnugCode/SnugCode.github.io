@@ -7,14 +7,17 @@
     "repoPrivate": true,
     "live": "https://theavenueschool.vic.edu.au/",
     "thoughts": "pages/thoughts/TAS.html",
-    "status": "Completed"
+    "thoughtsWip": true,
+    "status": "Completed",
+    "tech": ["React", "HTML", "CSS", "Render", "Vercel"]
   },
   {
     "title": "Kubera",
     "summary": "A local personal finance tracker for keeping money, spending, and habits easier to understand.",
     "repo": "https://github.com/SnugCode/Kubera",
     "thoughts": "pages/thoughts/Kubera.html",
-    "status": "Ongoing"
+    "status": "Ongoing",
+    "tech": ["TypeScript", "HTML", "CSS"]
   },
   {
     "title": "Ceylon Vale",
@@ -23,6 +26,7 @@
     "repo": "https://github.com/20230093Buddila/Project0MartketingWebsite",
     "repoPrivate": true,
     "live": "https://20230093buddila.github.io/Project0MartketingWebsite/",
-    "status": "Ongoing"
+    "status": "Ongoing",
+    "tech": ["HTML", "CSS", "JavaScript"]
   }
 ]

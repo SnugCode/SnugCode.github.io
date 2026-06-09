@@ -147,30 +147,20 @@
         font-size: clamp(2.35rem, 12vw, 3.25rem);
     }
 
-    .grid {
+    .project-showcase-body {
         grid-template-columns: 1fr;
-        align-items: stretch;
-        gap: 1rem;
     }
 
-    .project-card {
-        overflow: hidden;
+    .project-showcase-media {
+        order: -1;
     }
 
-    .project-media {
-        max-height: none;
+    .project-showcase-title {
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
     }
 
-    .project-body {
-        padding: 1rem 1rem 0.35rem;
-    }
-
-    .project-body h3 {
-        font-size: clamp(1.25rem, 7vw, 1.8rem);
-    }
-
-    .project-actions {
-        padding: 0 1rem 1rem;
+    .project-showcase-summary {
+        font-size: 0.95rem;
     }
 
     .project-actions a {
@@ -236,41 +226,6 @@
 }
 
 @media (max-width: 760px) {
-    #stack {
-        min-height: auto;
-        padding: 4rem 1rem 2rem;
-    }
-
-    #stack h1 {
-        margin: 0 0 1.5rem;
-        font-size: clamp(2.35rem, 12vw, 3.25rem);
-        line-height: 1.05;
-    }
-
-    .stack-group {
-        margin-bottom: 2rem;
-    }
-
-    .stack-group h2 {
-        margin: 0 0 0.85rem;
-        font-size: clamp(1.35rem, 7vw, 2rem);
-        line-height: 1.1;
-    }
-
-    .stack-grid {
-        grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
-        gap: 0.8rem;
-    }
-
-    .stack-tile {
-        padding: 1rem 0.65rem 0.75rem;
-    }
-
-    .stack-icon {
-        width: 44px;
-        height: 44px;
-    }
-
     #education {
         min-height: auto;
         padding: 4rem 1rem 3rem;
@@ -473,8 +428,7 @@
 }
 
 @media (hover: none) {
-    .project-card:hover,
-    .stack-tile:hover {
+    .project-nav-btn:hover {
         transform: none;
     }
 

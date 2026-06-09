@@ -1,6 +1,5 @@
 import { about } from "./about.js";
 import { projects } from "./projects.js";
-import { stack } from "./stack.js";
 import { education } from "./education.js";
 import { initTheme } from "./theme.js";
 import { initFooterTyping } from "./footerTyping.js";
@@ -14,7 +13,6 @@ function init() {
     initTheme();
     about();
     projects();
-    stack(); 
     education();
     initFooterTyping();
     initSectionMarker();

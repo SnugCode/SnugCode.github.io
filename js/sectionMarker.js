@@ -5,7 +5,6 @@ export function initSectionMarker() {
     const sections = [
         ["#intro", "#intro", "intro.mp4"],
         ["#projects", "#projects", "projects"],
-        ["#stack", "#stack", "stack"],
         ["#education", "#education", "education"],
         ["footer", "#intro", "footer"]
     ].map(([selector, href, current]) => ({
